@@ -1536,6 +1536,15 @@ OSD.loadDisplayFields = function() {
             positionable: true,
             preview: '1:23.456',
         },
+        INITIATION_BOARD_INFO: {
+            name: 'INITIATION_BOARD_INFO',
+            text: 'INITIATION_BOARD_INFO',
+            desc: 'INITIATION_BOARD_INFO',
+            defaultPosition: -1,
+            draw_order: 1075,
+            positionable: true,
+            preview: 'INITIATION IN 120',
+        },
     };
 };
 
@@ -1875,7 +1884,7 @@ OSD.searchLimitsElement = function(arrayElements) {
     return limits;
 };
 
-// Pick display fields by version, order matters, so these are going in an array... pry could iterate the example map instead
+// Pick display fields by version, order matters, so these are going in an array... try could iterate the example map instead
 OSD.chooseFields = function() {
     let F = OSD.ALL_DISPLAY_FIELDS;
 
@@ -1987,6 +1996,10 @@ OSD.chooseFields = function() {
             F.GPS_LAP_TIME_BEST3,
         ]);
     }
+
+    OSD.constants.DISPLAY_FIELDS = OSD.constants.DISPLAY_FIELDS.concat([
+        F.INITIATION_BOARD_INFO
+    ]);
 
     // Choose statistic fields
     // Nothing much to do here, I'm preempting there being new statistics
