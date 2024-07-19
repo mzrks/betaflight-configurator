@@ -24,8 +24,8 @@ import CryptoES from "crypto-es";
 import $ from 'jquery';
 import BuildApi from "./BuildApi";
 
-import { isWeb } from "./utils/isWeb";
 import { serialShim } from "./serial_shim.js";
+import { EventBus } from "../components/eventBus";
 
 let serial = serialShim();
 
@@ -34,6 +34,9 @@ let connectionTimestamp;
 let liveDataRefreshTimerId = false;
 
 let isConnected = false;
+
+const REBOOT_CONNECT_MAX_TIME_MS = 10000;
+let rebootTimestamp = 0;
 
 const toggleStatus = function () {
     isConnected = !isConnected;
@@ -49,105 +52,32 @@ function disconnectHandler(event) {
 }
 
 export function initializeSerialBackend() {
-    GUI.updateManualPortVisibility = function() {
-        if(isWeb()) {
-            return;
+
+    $("div.connect_controls a.connect").on('click', connectDisconnect);
+
+    EventBus.$on('port-handler:auto-select-serial-device', function(device) {
+        if (!GUI.connected_to && !GUI.connecting_to && GUI.active_tab !== 'firmware_flasher'
+                && ((PortHandler.portPicker.autoConnect && !["manual", "virtual"].includes(device))
+                || Date.now() - rebootTimestamp < REBOOT_CONNECT_MAX_TIME_MS)) {
+            connectDisconnect();
         }
-        const selected_port = $('#port').val();
-
-        $('#port-override-option').toggle(selected_port === 'manual');
-
-        $('#firmware-virtual-option').toggle(selected_port === 'virtual');
-
-        $('#auto-connect-and-baud').toggle(selected_port !== 'DFU');
-    };
-
-    GUI.updateManualPortVisibility();
-
-    $('#port-override').change(function () {
-        setConfig({'portOverride': $('#port-override').val()});
     });
 
-    const data = getConfig('portOverride');
-    if (data.portOverride) {
-        $('#port-override').val(data.portOverride);
-    }
-
-    $('div#port-picker #port').change(function (target) {
-        GUI.updateManualPortVisibility();
+    EventBus.$on('port-handler:auto-select-bluetooth-device', function(device) {
+        if (!GUI.connected_to && !GUI.connecting_to && GUI.active_tab !== 'firmware_flasher'
+            && ((PortHandler.portPicker.autoConnect && !["manual", "virtual"].includes(device))
+                || Date.now() - rebootTimestamp < REBOOT_CONNECT_MAX_TIME_MS)) {
+            connectDisconnect();
+        }
     });
 
+    // Using serialShim for serial and bluetooth we don't know which event we need before we connect
+    // Perhaps we should implement a Connection class that handles the connection and events for bluetooth, serial and sockets
+    // TODO: use event gattserverdisconnected for save and reboot and device removal.
 
-    $("div.connect_controls a.connect").on('click', function () {
-
-        const selectedPort = $('#port').val();
-        let portName;
-        if (selectedPort === 'manual') {
-            portName = $('#port-override').val();
-        } else {
-            portName = String($('div#port-picker #port').val());
-        }
-
-        if (!GUI.connect_lock && selectedPort !== 'none') {
-            // GUI control overrides the user control
-
-            GUI.configuration_loaded = false;
-
-            const selected_baud = parseInt($('div#port-picker #baud').val());
-            const selectedPort = $('#port').val();
-
-            if (selectedPort === 'DFU') {
-                $('select#baud').hide();
-                return;
-            }
-
-            if (!isConnected) {
-                console.log(`Connecting to: ${portName}`);
-                GUI.connecting_to = portName;
-
-                // lock port select & baud while we are connecting / connected
-                $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', true);
-                $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
-
-                const baudRate = parseInt($('#baud').val());
-                if (selectedPort === 'virtual') {
-                    CONFIGURATOR.virtualMode = true;
-                    CONFIGURATOR.virtualApiVersion = $('#firmware-version-dropdown').val();
-
-                    // Hack to get virtual working on the web
-                    serial = serialShim();
-                    serial.connect('virtual', {}, onOpenVirtual);
-                } else if (isWeb()) {
-                    CONFIGURATOR.virtualMode = false;
-                    serial = serialShim();
-                    // Explicitly disconnect the event listeners before attaching the new ones.
-                    serial.removeEventListener('connect', connectHandler);
-                    serial.addEventListener('connect', connectHandler);
-
-                    serial.removeEventListener('disconnect', disconnectHandler);
-                    serial.addEventListener('disconnect', disconnectHandler);
-
-                    serial.connect({ baudRate });
-                } else {
-                    serial.connect(portName, { bitrate: selected_baud }, onOpen);
-                    toggleStatus();
-                }
-
-            } else {
-                if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-                    $('div#flashbutton a.flash_state').removeClass('active');
-                    $('div#flashbutton a.flash').removeClass('active');
-                }
-                GUI.timeout_kill_all();
-                GUI.interval_kill_all();
-                GUI.tab_switch_cleanup(() => GUI.tab_switch_in_progress = false);
-
-                function onFinishCallback() {
-                    finishClose(toggleStatus);
-                }
-
-                mspHelper?.setArmingEnabled(true, false, onFinishCallback);
-            }
+    serial.addEventListener("removedDevice", (event) => {
+        if (event.detail.path === GUI.connected_to) {
+            connectDisconnect();
         }
     });
 
@@ -163,44 +93,73 @@ export function initializeSerialBackend() {
         }
     });
 
-    // auto-connect
-    const result = getConfig('auto_connect');
-    if (result.auto_connect === undefined || result.auto_connect) {
-        // default or enabled by user
-        GUI.auto_connect = true;
-
-        $('input.auto_connect').prop('checked', true);
-        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
-
-        $('select#baud').val(115200).prop('disabled', true);
-    } else {
-        // disabled by user
-        GUI.auto_connect = false;
-
-        $('input.auto_connect').prop('checked', false);
-        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
-    }
-
-    // bind UI hook to auto-connect checkbos
-    $('input.auto_connect').change(function () {
-        GUI.auto_connect = $(this).is(':checked');
-
-        // update title/tooltip
-        if (GUI.auto_connect) {
-            $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
-
-            $('select#baud').val(115200).prop('disabled', true);
-        } else {
-            $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
-
-            if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
-        }
-
-        setConfig({'auto_connect': GUI.auto_connect});
-    });
-
     PortHandler.initialize();
     PortUsage.initialize();
+}
+
+function connectDisconnect() {
+    const selectedPort = PortHandler.portPicker.selectedPort;
+    const portName = selectedPort === 'manual' ? PortHandler.portPicker.portOverride : selectedPort;
+
+    if (!GUI.connect_lock && selectedPort !== 'noselection' && !selectedPort.path?.startsWith('usb_')) {
+        // GUI control overrides the user control
+
+        GUI.configuration_loaded = false;
+
+        const baudRate = PortHandler.portPicker.selectedBauds;
+        const selectedPort = portName;
+
+        if (!isConnected) {
+            // prevent connection when we do not have permission
+            if (selectedPort.startsWith('requestpermission')) {
+                return;
+            }
+
+            console.log(`[SERIAL-BACKEND] Connecting to: ${portName}`);
+            GUI.connecting_to = portName;
+
+            // lock port select & baud while we are connecting / connected
+            PortHandler.portPickerDisabled = true;
+            $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
+
+            CONFIGURATOR.virtualMode = selectedPort === 'virtual';
+            CONFIGURATOR.bluetoothMode = selectedPort.startsWith('bluetooth');
+
+            if (CONFIGURATOR.virtualMode) {
+                CONFIGURATOR.virtualApiVersion = PortHandler.portPicker.virtualMspVersion;
+
+                // Hack to get virtual working on the web
+                serial = serialShim();
+                serial.connect(onOpenVirtual);
+            } else {
+                CONFIGURATOR.virtualMode = false;
+                serial = serialShim();
+                // Explicitly disconnect the event listeners before attaching the new ones.
+                serial.removeEventListener('connect', connectHandler);
+                serial.addEventListener('connect', connectHandler);
+
+                serial.removeEventListener('disconnect', disconnectHandler);
+                serial.addEventListener('disconnect', disconnectHandler);
+
+                serial.connect(portName, { baudRate });
+            }
+
+        } else {
+            if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                $('div#flashbutton a.flash_state').removeClass('active');
+                $('div#flashbutton a.flash').removeClass('active');
+            }
+            GUI.timeout_kill_all();
+            GUI.interval_kill_all();
+            GUI.tab_switch_cleanup(() => GUI.tab_switch_in_progress = false);
+
+            function onFinishCallback() {
+                finishClose(toggleStatus);
+            }
+
+            mspHelper?.setArmingEnabled(true, false, onFinishCallback);
+        }
+    }
 }
 
 function finishClose(finishedCallback) {
@@ -216,6 +175,7 @@ function finishClose(finishedCallback) {
         $('#dialogResetToCustomDefaults')[0].close();
     }
 
+    // serialShim calls the disconnect method for selected connection type.
     serial.disconnect(onClosed);
 
     MSP.disconnect_cleanup();
@@ -230,8 +190,7 @@ function finishClose(finishedCallback) {
     $('#dialogReportProblems-closebtn').click();
 
     // unlock port select & baud
-    $('div#port-picker #port').prop('disabled', false);
-    if (!GUI.auto_connect) $('div#port-picker #baud').prop('disabled', false);
+    PortHandler.portPickerDisabled = false;
 
     // reset connect / disconnect button
     $('div.connect_controls a.connect').removeClass('active');
@@ -256,7 +215,7 @@ function setConnectionTimeout() {
         if (!CONFIGURATOR.connectionValid) {
             gui_log(i18n.getMessage('noConfigurationReceived'));
 
-            $('div.connect_controls a.connect').click(); // disconnect
+            connectDisconnect();
         }
     }, 10000);
 }
@@ -275,7 +234,7 @@ function abortConnection() {
     $('div#connectbutton a.connect').removeClass('active');
 
     // unlock port select & baud
-    $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', false);
+    PortHandler.portPickerDisabled = false;
 
     // reset data
     isConnected = false;
@@ -316,18 +275,16 @@ function onOpen(openInfo) {
         result = getConfig('expertMode')?.expertMode ?? false;
         $('input[name="expertModeCheckbox"]').prop('checked', result).trigger('change');
 
-        if(isWeb()) {
-            serial.removeEventListener('receive', read_serial_adapter);
-            serial.addEventListener('receive', read_serial_adapter);
-        } else {
-            serial.onReceive.addListener(read_serial);
-        }
+        // serialShim adds event listener for selected connection type
+        serial.removeEventListener('receive', read_serial_adapter);
+        serial.addEventListener('receive', read_serial_adapter);
+
         setConnectionTimeout();
         FC.resetState();
         mspHelper = new MspHelper();
         MSP.listen(mspHelper.process_data.bind(mspHelper));
         MSP.timeout = 250;
-        console.log(`Requesting configuration data`);
+        console.log(`[SERIAL-BACKEND] Requesting configuration data`);
 
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
             gui_log(i18n.getMessage('apiVersionReceived', FC.CONFIG.apiVersion));
@@ -424,7 +381,7 @@ function processCustomDefaults() {
             dialog.close();
 
             GUI.timeout_add('disconnect', function () {
-                $('div.connect_controls a.connect').click(); // disconnect
+                connectDisconnect(); // disconnect
             }, 0);
         });
 
@@ -448,7 +405,7 @@ function processCustomDefaults() {
 
 function processBoardInfo() {
 
-    gui_log(i18n.getMessage('boardInfoReceived', [FC.getHardwareName(), FC.CONFIG.boardVersion]));
+    gui_log(i18n.getMessage('boardInfoReceived', [FC.CONFIG.hardwareName, FC.CONFIG.boardVersion]));
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_46)) {
         checkReportProblems();
@@ -459,7 +416,7 @@ function processBoardInfo() {
         boardIdentifier: FC.CONFIG.boardIdentifier,
         targetName: FC.CONFIG.targetName,
         boardName: FC.CONFIG.boardName,
-        hardware: FC.getHardwareName(),
+        hardware: FC.CONFIG.hardwareName,
         manufacturerId: FC.CONFIG.manufacturerId,
         apiVersion: FC.CONFIG.apiVersion,
         flightControllerVersion: FC.CONFIG.flightControllerVersion,
@@ -497,7 +454,7 @@ function checkReportProblems() {
 
             abort = true;
             GUI.timeout_remove('connecting'); // kill connecting timer
-            $('div.connect_controls a.connect').click(); // disconnect
+            connectDisconnect(); // disconnect
         }
 
         if (!abort) {
@@ -685,42 +642,34 @@ function onConnect() {
         }
     }
 
-    const sensorState = $('#sensor-status');
-    sensorState.show();
-
-    const portPicker = $('#portsinput');
-    portPicker.hide();
-
-    const dataflash = $('#dataflash_wrapper_global');
-    dataflash.show();
+    // header bar
+    $('#sensor-status').show();
+    $('#portsinput').hide();
+    $('#dataflash_wrapper_global').show();
 }
 
 function onClosed(result) {
-    if (result) { // All went as expected
-        gui_log(i18n.getMessage('serialPortClosedOk'));
-    } else { // Something went wrong
-        gui_log(i18n.getMessage('serialPortClosedFail'));
-    }
+    gui_log(i18n.getMessage(result ? 'serialPortClosedOk' : 'serialPortClosedFail'));
 
     $('#tabs ul.mode-connected').hide();
     $('#tabs ul.mode-connected-cli').hide();
     $('#tabs ul.mode-disconnected').show();
 
-    const sensorState = $('#sensor-status');
-    sensorState.hide();
-
-    const portPicker = $('#portsinput');
-    portPicker.show();
-
-    const dataflash = $('#dataflash_wrapper_global');
-    dataflash.hide();
-
-    const battery = $('#quad-status_wrapper');
-    battery.hide();
+    // header bar
+    $('#sensor-status').hide();
+    $('#portsinput').show();
+    $('#dataflash_wrapper_global').hide();
+    $('#quad-status_wrapper').hide();
 
     clearLiveDataRefreshTimer();
 
     MSP.clearListeners();
+
+    if (PortHandler.portPicker.selectedPort !== 'virtual') {
+        serial.removeEventListener('receive', read_serial_adapter);
+        serial.removeEventListener('connect', connectHandler);
+        serial.removeEventListener('disconnect', disconnectHandler);
+    }
 
     CONFIGURATOR.connectionValid = false;
     CONFIGURATOR.cliValid = false;
@@ -746,8 +695,9 @@ async function update_live_status() {
 
     if (GUI.active_tab !== 'cli' && GUI.active_tab !== 'presets') {
         await MSP.promise(MSPCodes.MSP_ANALOG);
+        await MSP.promise(MSPCodes.MSP_BATTERY_STATE);
 
-        const nbCells = FC.ANALOG.voltage === 0 ? 1 : Math.floor(FC.ANALOG.voltage / FC.BATTERY_CONFIG.vbatmaxcellvoltage) + 1;
+        const nbCells = FC.ANALOG.voltage === 0 || FC.BATTERY_STATE.cellCount === 0 ? 1 : FC.BATTERY_STATE.cellCount;
         const min = FC.BATTERY_CONFIG.vbatmincellvoltage * nbCells;
         const max = FC.BATTERY_CONFIG.vbatmaxcellvoltage * nbCells;
         const warn = FC.BATTERY_CONFIG.vbatwarningcellvoltage * nbCells;
@@ -805,53 +755,31 @@ function startLiveDataRefreshTimer() {
 }
 
 export function reinitializeConnection(callback) {
-    const isVirtual = CONFIGURATOR.virtualMode && GUI.connected_to == 'virtual' && CONFIGURATOR.connectionValid && serial.connectionId === 'virtual';
-
-    gui_log(i18n.getMessage('deviceRebooting'));
-
-    // Close connection gracefully if it still exists.
-    const previousTimeStamp = connectionTimestamp;
-
-    if (serial.connectionId) {
-        if (GUI.connected_to || GUI.connecting_to) {
-            $('a.connect').trigger('click');
-        } else {
-            serial.disconnect();
-        }
-    }
 
     // In virtual mode reconnect when autoconnect is enabled
-    if (isVirtual) {
-        return setTimeout(() => {
-            if (GUI.auto_connect) {
-                $('a.connect').trigger('click');
-            }
-            if (typeof callback === 'function') {
-                callback();
-            }
+    if (CONFIGURATOR.virtualMode && PortHandler.portPicker.autoConnect) {
+        return setTimeout(function() {
+            $('a.connect').trigger('click');
         }, 500);
     }
 
-    // Wait for serial or tcp connection to be available
-    let attempts = 0;
-    const reconnect = setInterval(waitforSerial, 100);
+    rebootTimestamp = Date.now();
+    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
 
-    function waitforSerial() {
-        if ((connectionTimestamp !== previousTimeStamp && CONFIGURATOR.connectionValid) || GUI.active_tab === 'firmware_flasher') {
-            console.log(`Serial connection available after ${attempts / 10} seconds`);
-            clearInterval(reconnect);
-            gui_log(i18n.getMessage('deviceReady'));
+    if (CONFIGURATOR.bluetoothMode) {
+        // Bluetooth devices are not disconnected when rebooting
+        connectDisconnect();
+    }
 
-            if (typeof callback === 'function') {
-                callback();
-            }
-        } else {
-            attempts++;
-            if (attempts > 100) {
-                clearInterval(reconnect);
-                console.log(`failed to get serial connection, gave up after 10 seconds`);
-                gui_log(i18n.getMessage('serialPortOpenFail'));
-            }
-        }
+    gui_log(i18n.getMessage('deviceRebooting'));
+
+    // wait for the device to reboot
+    setTimeout(function() {
+        gui_log(i18n.getMessage('deviceReady'));
+    }, 2000);
+
+    if (callback) {
+        callback();
     }
 }
+

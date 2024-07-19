@@ -31,6 +31,22 @@
     "dontShowAgain": {
         "message": "Не показувати знову"
     },
+    "pwaOnNeedRefreshTitle": {
+        "message": "Потрібно оновити застосунок",
+        "description": "Title of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnNeedRefreshText": {
+        "message": "Вам потрібно оновити сторінку для отримання останніх змін. Оновлення зараз перезавантажить сторінку, і ви втратите будь-які незбережені зміни, та скасує будь-яку операцію, яка триває.<br><br>Бажаєте оновити її зараз? Також ви можете відхилити це повідомлення і власноруч оновити сторінку пізніше.",
+        "description": "Text of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnOffilenReadyTitle": {
+        "message": "Застосунок готовий до використання без мережі",
+        "description": "Title of the window that appears when the app is ready to be installed and used offline"
+    },
+    "pwaOnOffilenReadyText": {
+        "message": "Ви можете встановити це як автономний застосунок на вашому пристрої, якщо бажаєте. Шукайте таку функцію в адресному рядку браузера або в меню.",
+        "description": "Text of the window that appears when the app is ready to be installed and used offline"
+    },
     "operationNotSupported": {
         "message": "Операція не підтримується пристроєм."
     },
@@ -49,12 +65,36 @@
     "disconnect": {
         "message": "Від'єднати"
     },
+    "portsSelectNoSelection": {
+        "message": "Виберіть свій пристрій",
+        "description": "Text for the option to select a device in the port selection dropdown"
+    },
     "portsSelectManual": {
         "message": "Ручний вибір"
+    },
+    "portsSelectNone": {
+        "message": "Немає доступних з'єднань"
     },
     "portsSelectVirtual": {
         "message": "Віртуальний режим (експериментальний)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
+    },
+    "portsSelectPermission": {
+        "message": "--- Я не можу знайти мій пристрій USB ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access the device."
+    },
+    "portsSelectPermissionBluetooth": {
+        "message": "--- Я не можу знайти мій пристрій Bluetooth ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a Bluetooth device."
+    },
+    "bluetoothConnected": {
+        "message": "Під'єднано до пристрою Bluetooth: $1"
+    },
+    "bluetoothConnectionType": {
+        "message": "Тип підключення Bluetooth: $1"
+    },
+    "bluetoothConnectionError": {
+        "message": "Помилка Bluetooth: $1"
     },
     "virtualMSPVersion": {
         "message": "Версія віртуальної прошивки"
@@ -106,9 +146,9 @@
         "message": "Показати всі послідовні пристрої (для виробників або розробки)",
         "description": "Do not filter serial devices using VID\/PID values (for manufacturers or development)"
     },
-    "useMdnsBrowser": {
-        "message": "Використовувати виявлення пристроїв mDNS у мережі (експериментально)",
-        "description": "Enable mDNS Browser Device discovery in PortHandler (experimental)"
+    "showManualMode": {
+        "message": "Увімкнути режим ручного з'єднання",
+        "description": "Text for the option to enable or disable manual connection mode"
     },
     "showVirtualMode": {
         "message": "Включити режим віртуального з'єднання",
@@ -290,6 +330,10 @@
     },
     "logActionShow": {
         "message": "Показати журнал подій"
+    },
+    "fileSystemPickerFiles": {
+        "message": "{{typeof}} файли",
+        "description": "Text for the file picker dialog, showing the type of files selected. The parameter can be HEX, TXT, etc."
     },
     "serialErrorFrameError": {
         "message": "Помилка послідовного підключення: погане кадрування"
@@ -715,12 +759,6 @@
     "initialSetupRebootBootloaderText": {
         "message": "Перезапустити в режим <strong>завантажувача \/ DFU<\/strong>."
     },
-    "initialSetupBackupSuccess": {
-        "message": "Резервне копіювання збережене <span class=\"message-positive\">успішно<\/span>"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "Конфігурацію відновлено <span class=\"message-positive\">успішно<\/span>"
-    },
     "initialSetupButtonResetZaxis": {
         "message": "Скинути вісь Z, зміщення: 0 градусів"
     },
@@ -873,9 +911,9 @@
         "message": "Не виявлено правильного сигналу приймача",
         "description": "Message that pops up to describe the RX_FAILSAFE arming disable flag"
     },
-    "initialSetupArmingDisableFlagsTooltipBAD_RX_RECOVERY": {
+    "initialSetupArmingDisableFlagsTooltipNOT_DISARMED": {
         "message": "Ваш приймач щойно відновив зв'язок після безаварійності, але перемикач взведення ввімкнено",
-        "description": "Message that pops up to describe the BAD_RX_RECOVERY arming disable flag"
+        "description": "Message that pops up to describe the NOT_DISARMED arming disable flag"
     },
     "initialSetupArmingDisableFlagsTooltipBOXFAILSAFE": {
         "message": "Перемикач «FAILSAFE» був активований",
@@ -1034,6 +1072,18 @@
     },
     "initialSetupInfoBuildEmpty": {
         "message": "Локальна збірка - без хмарних даних"
+    },
+    "initialSetupInfoBuildType": {
+        "message": "Тип збірки"
+    },
+    "initialSetupInfoBuildLocal": {
+        "message": "Локальна збірка"
+    },
+    "initialSetupInfoBuildCloud": {
+        "message": "Хмарна збірка"
+    },
+    "initialSetupNoBuildInfo": {
+        "message": "Інформація про збірку відсутня"
     },
     "initialSetupNotOnline": {
         "message": "Сервер недоступний"
@@ -1288,13 +1338,13 @@
         "message": "Ця опція налаштовує мікшер очікувати, що мотор буде обертатись в протилежний бік і пропелери будуть орієнтовані відповідно. <strong>Попередження:<\/strong> Це не змінює напрямок руху мотора. Для цього скористайтеся інструментом конфігурації для вашого електронного контролера швидкості (анг. - ESC) або переключіть дроти між ESC та двигуном. Також переконайтеся, що з вимкненими пропелерами ваші мотори обертаються у напрямках, показаних на схемі вище, перш ніж намагатися взвести."
     },
     "configurationAutoDisarmDelay": {
-        "message": "Охолостити мотори після заданої затримки [seconds] (Потребує функцію MOTOR_STOP)"
+        "message": "Охолостити мотори після затримки [секунди]"
     },
-    "configurationDisarmKillSwitch": {
-        "message": "Охолощувати мотори незалежно від значення тяги (Коли взведення \/ ARM налаштовано на вкладці Режими через AUX-канал)"
+    "configurationAutoDisarmDelayHelp": {
+        "message": "Охолостити мотори після заданої затримки [секунди] (Потребує функцію MOTOR_STOP)"
     },
-    "configurationDisarmKillSwitchHelp": {
-        "message": "Взведення завжди заборонено, коли тага не мінімальна. Будьте обережні, оскільки ви можете випадково охолостити перемикачем під час польоту, коли ця опція увімкнена."
+    "configurationGyroCalOnFirstArm": {
+        "message": "Калібрувати гіроскоп при першому взведенні"
     },
     "configurationDigitalIdlePercent": {
         "message": "% тяги на холостому ходу (статичний)"
@@ -1687,9 +1737,6 @@
         "message": "<b>Д<\/b>иференціальна",
         "description": "Table header of the D Min feature in the PIDs tab"
     },
-    "pidTuningDMinDisabledNote": {
-        "message": "<strong>Примітка:<\/strong> Функцію Д Макс вимкнено, а її параметри приховано. Для використання Д Макс, будь ласка, увімкніть її у $t(pidTuningPidSettings.message)."
-    },
     "pidTuningDMinFeatureTitle": {
         "message": "Налаштування динамічного демпфування \/ Д Макс",
         "description": "Title for the options panel for the D Max feature"
@@ -1764,9 +1811,6 @@
     "receiverRcSmoothingFilter": {
         "message": "Фільтр"
     },
-    "receiverRcSmoothingTypeHelp": {
-        "message": "Тип згладжування команд пульта"
-    },
     "rcSmoothingSetpointCutoffHelp": {
         "message": "Частота відсікання в Гц, що використовується фільтром заданого значення. Використання нижчих значень призведе до більш плавних вхідних сигналів і більше підходить для повільних протоколів приймачів. Більшості користувачів слід залишити цей параметр на 0, що відповідає значенню \"Автоматичний\"."
     },
@@ -1775,12 +1819,6 @@
     },
     "rcSmoothingChannelsSmoothedHelp": {
         "message": "Згладжування каналів застосовується до"
-    },
-    "rcSmoothingFeedforwardTypeHelp": {
-        "message": "Тип методу фільтрації, який використовується для упередження. Починаючи з версії 4.2 рекомендується використовувати значення за замовчуванням \"Автоматичний\". Для 4.1 та ранніх версій більшість користувачів мають використовувати значення за замовчуванням \"BIQUAD\", оскільки воно забезпечує хороший баланс між згладжуванням та затримкою. \"PT1\" дещо зменшує затримку, але забезпечує менше згладжування."
-    },
-    "rcSmoothingSetpointTypeHelp": {
-        "message": "Тип методу фільтрації, що використовується для заданого значення. Більшість користувачів мають використовувати значення за замовчуванням \"BIQUAD\", оскільки воно забезпечує хороший баланс між згладжуванням і затримкою. \"PT1\" дещо зменшує затримку, але забезпечує менше згладжування."
     },
     "receiverRcSmoothingSetpointManual": {
         "message": "Дозволяє вибрати, чи буде частота відсікання фільтра заданого значення автоматично розраховуватися (рекомендовано) або вибиратися користувачем вручну. Використання режиму \"Ручний\" не рекомендується для таких протоколів приймачів, як Crossfire, які можуть змінюватися в польоті."
@@ -1794,47 +1832,11 @@
     "receiverRcSmoothingFeedforwardCutoff": {
         "message": "Частота відсікання упередження"
     },
-    "receiverRcSetpointType": {
-        "message": "Тип фільтру заданого значення"
-    },
     "receiverRcFeedforwardType": {
         "message": "Тип фільтру упередження"
     },
-    "receiverRcSmoothingFeedforwardTypeOff": {
-        "message": "Вимкнено"
-    },
     "receiverRcSmoothingFeedforwardTypeAuto": {
         "message": "Автоматично"
-    },
-    "receiverRcSmoothingChannel": {
-        "message": "Згладжені канали"
-    },
-    "receiverRcInterpolation": {
-        "message": "Інтерполяція пульта"
-    },
-    "receiverRcInterpolationHelp": {
-        "message": "Системи радіокерування (пульт+передавач+приймач) не такі швидкі, як PID контури. Це означає, що PID-контур має прогалини в потоці інформації від пульта. Ця опція дозволяє інтерполяцію входу пульта під час проміжків часу, коли не надходять кадри від пульта. Ця опція також забезпечує чистішу поведінку P і D, оскільки немає стрибкоподібних коливань на вході керування."
-    },
-    "receiverRcInterpolationIntervalHelp": {
-        "message": "Інтервал інтерполяції для ручного режиму RC інтерполяції в мілісекундах"
-    },
-    "receiverRcInterpolationOff": {
-        "message": "Вимкнено"
-    },
-    "receiverRcSmoothingType": {
-        "message": "Тип згладжування"
-    },
-    "receiverRcInterpolationDefault": {
-        "message": "Попереднє налаштування"
-    },
-    "receiverRcInterpolationAuto": {
-        "message": "Автоматичний"
-    },
-    "receiverRcInterpolationManual": {
-        "message": "Ручний"
-    },
-    "receiverRcInterpolationInterval": {
-        "message": "Інтервал інтерполяції RC [ms]"
     },
     "receiverRcSmoothingMode": {
         "message": "Режим згладжування"
@@ -2444,18 +2446,6 @@
     },
     "adjustmentsHelp": {
         "message": "Налаштувати перемикачі регулювання. Додаткову інформацію дивіться у розділі посібника «Коригування під час польоту». Зміни, внесені функціями налаштування, не зберігаються автоматично."
-    },
-    "adjustmentSlotsHelp": {
-        "message": "Є 4 слоти. Кожен перемикач, який використовується для одночасного регулювання, вимагає ексклюзивного використання слота."
-    },
-    "adjustmentsExamples": {
-        "message": "Приклади:"
-    },
-    "adjustmentsExample1": {
-        "message": "Використовуйте трипозиційний перемикач на AUX1 для вибору між Тангаж\/Крен P, I і D і ще один трипозиційний перемикач на AUX2 для збільшення або зменшення значення при утримуванні в верхньому або нижньому положенні."
-    },
-    "adjustmentsExample2": {
-        "message": "Використовуйте трипозиційний перемикач на AUX4, щоб увімкнути вибір профілю частоти за допомогою того самого трьохпозиційного перемикача на тому ж каналі."
     },
     "adjustmentsColumnEnable": {
         "message": "Якщо увімкнено"
@@ -3379,7 +3369,7 @@
         "message": "Виберіть тип збірки, щоб побачити доступні плати."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Виберіть або автоматично визначте вашу плату, щоб побачити доступні онлайн версії прошивок - Виберіть відповідне програмне забезпечення для вашої плати."
+        "message": "Виберіть або визначте вашу плату, щоб побачити доступні онлайн версії прошивок - Виберіть відповідну прошивку для вашої плати."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
         "message": "Конфігуратор Betaflight підтримує прошивання уніфікованих цільових пристроїв разом з відповідними платоспецифічними налаштуваннями за один крок.<br><br>Концепція уніфікованих цільових пристроїв означає, що один і той же файл прошивки .hex можна використовувати для всіх плат, які використовують той самий мікроконтролер (MCU).<br><br>У версії Betaflight 4.4 додається <strong>Хмарна Збірка (Cloud Build)<\/strong>.<br><br>З Хмарною Збіркою (Cloud Build) нам потрібно описати опції обладнання, наявного у вашій збірці.<br><br>Щоб різні плати працювали з однією і тією ж прошивкою, при прошиванні уніфікованої цільової прошивки, специфічний файл конфігурації розміщується поряд з прошивкою.<br><br>При локальній збірці, ви можете завантажити файл конфігурації уніфікованого цільового пристрою або вибрати плату перед завантаженням файлу прошивки .hex.<br><br>Якщо у вас виникають проблеми з використанням прошивки, рекомендуємо приєднатися до Discord або <a href=\"https:\/\/github.com\/betaflight\/betaflight\/issues\" target=\"_blank\" rel=\"noopener noreferrer\">повідомити про проблему<\/a>."
@@ -3394,7 +3384,7 @@
         "message": "Прошити при підключенні"
     },
     "firmwareFlasherFlashOnConnectDescription": {
-        "message": "Спробувати прошити плату автоматично (у випадку виявлення нового послідовного порту).<br \/><br \/><span class=\"message-negative\">УВАГА<\/span>: ця функція вимикає автовиявлення і резервне копіювання."
+        "message": "Спробувати прошити плату автоматично (у випадку виявлення нового послідовного порту).<br \/><br \/><span class=\"message-negative\">УВАГА<\/span>: ця функція вимикає визначення і резервне копіювання."
     },
     "firmwareFlasherFullChipErase": {
         "message": "Повністю очистити мікроконтролер"
@@ -3537,6 +3527,9 @@
     "firmwareFlasherNoFirmwareSelected": {
         "message": "<b>Не вибрано прошивку для завантаження<\/b>"
     },
+    "firmwareFlasherNoTargetsLoaded": {
+        "message": "Цільові пристрої не завантажені"
+    },
     "firmwareFlasherNoValidPort": {
         "message": "<span class=\"message-negative\">Будь ласка, виберіть правильний послідовний порт<\/span>"
     },
@@ -3569,10 +3562,10 @@
         "message": "Продовжити"
     },
     "firmwareFlasherDetectBoardButton": {
-        "message": "Автовизначення"
+        "message": "Визначити"
     },
     "firmwareFlasherDetectBoardDescriptionHint": {
-        "message": "Автоматичне виявлення працює тільки коли пристрій не перебуває в режимі DFU та коли зв'язок MSP працює. Іноді доводиться спробувати підключитися кілька разів або навіть перепідключити USB. Спробуйте спочатку підключитися як зазвичай, можливо ви забули застосувати налаштування за замовчуванням (custom defaults). Після прошивання перезавантажтеся - відключіть та знову підключіть USB."
+        "message": "Виявлення працює тільки коли пристрій не перебуває в режимі завантажувача та коли зв'язок MSP працює. Іноді доводиться спробувати підключитися кілька разів або навіть перепідключити USB. Спробуйте спочатку підключитися як зазвичай, можливо ви забули застосувати налаштування за замовчуванням (custom defaults). Після прошивання перезавантажтеся - відключіть та знову підключіть USB."
     },
     "firmwareFlasherDetectBoardQuery": {
         "message": "Отримати інформацію з плати для попереднього вибору правильної прошивки"
@@ -3699,6 +3692,18 @@
         "message": "GPS",
         "description": "One of the modes of the Led Strip"
     },
+    "ledStripFunctionGPSBarOption": {
+        "message": "Індикатор стану GPS",
+        "description": "One of the modes of the Led Strip"
+    },
+    "ledStripFunctionBatteryBarOption": {
+        "message": "Індикатор батареї",
+        "description": "One of the modes of the Led Strip"
+    },
+    "ledStripFunctionAltitudeOption": {
+        "message": "Висота",
+        "description": "One of the modes of the Led Strip"
+    },
     "ledStripFunctionRingOption": {
         "message": "Кільце",
         "description": "One of the modes of the Led Strip"
@@ -3792,6 +3797,14 @@
     "ledStripModeColorsModeGPSLocked": {
         "message": "GPS: координати отримано",
         "description": "One of the modes in Color Mode in Led Strip"
+    },
+    "ledStripModeGpsDefault": {
+        "message": "За замовчуванням",
+        "description": "One of the modes in GPS Mode in Led Strip"
+    },
+    "ledStripModeGpsBar": {
+        "message": "Індикатор GPS",
+        "description": "One of the modes in GPS Mode in Led Strip"
     },
     "ledStripWiring": {
         "message": "Схема підключення стрічки",
@@ -4137,30 +4150,6 @@
         "message": "Збільшує всі параметри PID однаково. Не змінюйте цей повзунок, якщо у вас не закінчаться налаштування на інших повзунках. Зазвичай це потрібно лише для квадрокоптерів із низькою керованістю або високим моментом інерції (MoI), як-от X-Class або cinelifter. Занадто великий головний множник може спричинити тремтячі коливання або перегрів моторів.",
         "description": "Master Gain tuning slider helpicon message"
     },
-    "pidTuningPDRatioSlider": {
-        "message": "Баланс ПД:",
-        "description": "PD balance tuning slider label"
-    },
-    "pidTuningPDRatioSliderHelp": {
-        "message": "Змінює Д та Д Макс. Відносно високе значення Д зменшить відгук на рухи стіків, може перегрівати мотори, але допоможе контролювати коливання, спричинені П-коефіцієнтом та покращить коливання, спричинені самотурбулентністю (propwash).<br \/><br \/>Відносно низьке значення Д-сладової забезпечить швидкий відгук на рух стіків, але може погіршити propwash та реакцію на зовнішні сили (вітер).",
-        "description": "D_term tuning slider helpicon message"
-    },
-    "pidTuningPDGainSlider": {
-        "message": "Підсилення П та Д:",
-        "description": "P and D Gain tuning slider label"
-    },
-    "pidTuningPDGainSliderHelp": {
-        "message": "Зниження значень коефіцієнтів П та Д призведе до більш прохолодних моторів, але також збільшить коливання через самотрубулентність (анг - propwash). Надто низьке значення може зробити квадрокоптер нестабільним.<br \/><br \/>Складові П та Д співпрацюють для зменшення реакції на самотурбулентність - propwash.<br \/><br \/>Вищі значення збільшать нагрівання моторів і можуть збільшити коливання під час рівномірного прямого польоту через вищі значення підсилення Д-сладової.",
-        "description": "P and D gain tuning slider helpicon message"
-    },
-    "pidTuningResponseSliderLegacy": {
-        "message": "Підсилення реакції на стіки:",
-        "description": "Response tuning slider label"
-    },
-    "pidTuningResponseSliderLegacyHelp": {
-        "message": "Менші значення Упередження (анг. - FF, Feedforward) погіршать реакцію на рух стіків і можуть призвести до повільного відскоку наприкінці сальто або бочки через те, що квадрокоптер недостатньо швидко реагує на команди стіків, а І-складова накопичується і викликає \"відскок І-складової\".<br \/><br \/>Вищі значення Упередження, навпаки, забезпечать швидку реакцію на гострі рухи стіками. Занадто великі значення Упередження (FF, Feedforward) можуть викликати перельоти і швидкі відскоки на кінці сальто або бочки.<br \/><br \/>Примітка:<br \/>Функція «Послаблення І-складової» може зупинити накопичення І-складової при рухах стійків для квадрокоптерів з низькою керованістю або при використанні низьких значень Відповіді на стіки.",
-        "description": "Stick response gain tuning slider helpicon message"
-    },
     "pidTuningDGainSlider": {
         "message": "Демпфування: <br \/><i><small>Д-коефіцієнт<\/small><\/i>",
         "description": "D Gain (Damping) tuning slider label"
@@ -4242,17 +4231,11 @@
     "pidTuningLowpassFilterType": {
         "message": "Тип фільтра"
     },
-    "pidTuningGyroLowpassDyn": {
-        "message": "Динамічний фільтр нижніх частот гіроскопа"
-    },
     "pidTuningMinCutoffFrequency": {
         "message": "Мін. частота зрізу [Hz]"
     },
     "pidTuningMaxCutoffFrequency": {
         "message": "Макс. частота зрізу [Hz]"
-    },
-    "pidTuningGyroLowpassDynType": {
-        "message": "Фільтр нижніх частот гіроскопа 1, динамічний тип"
     },
     "pidTuningGyroLowpass2": {
         "message": "Фільтр нижніх частот гіроскопа 2"
@@ -4312,9 +4295,6 @@
     "pidTuningDynamicNotchRange": {
         "message": "Діапазон динамічного режекторного фільтру"
     },
-    "pidTuningDynamicNotchWidthPercent": {
-        "message": "Відсоток ширини динамічного зрізу"
-    },
     "pidTuningDynamicNotchQ": {
         "message": "Добротність (Q factor)"
     },
@@ -4329,9 +4309,6 @@
     },
     "pidTuningDynamicNotchRangeHelp": {
         "message": "Динамічний фільтр зрізу має три діапазони частот, в яких він може працювати: НИЗЬКИЙ (80-330 Гц) для квадрокоптерів з нижчою швидкістю обертання, наприклад, 6+ дюймів, СЕРЕДНІЙ (140-550 Гц) для звичайного квадрокоптера розміром 5 дюймів і ВИСОКИЙ (230-800 Гц) для дуже швидкого квадрокоптера розміром 2.5-3 дюйма. Опція \"АВТО\" вибирає діапазон залежно від значення максимальної частоти зрізу фільтра динамічного нижньочастотного фільтра гіроскопа 1."
-    },
-    "pidTuningDynamicNotchWidthPercentHelp": {
-        "message": "Це встановлює ширину між двома динамічними зрізовими фільтрами. Якщо встановити його на значення 0, це вимкне другий динамічний зрізовий фільтр і зменшить затримку фільтра, однак це може призвести до підвищення температури моторів."
     },
     "pidTuningDynamicNotchQHelp": {
         "message": "Добротність впливає на ширину динамічних зрізових фільтрів. Високе значення робить їх вужчими і точнішими, а низьке значення робить їх ширшими і більшими. Дуже низьке значення суттєво збільшить затримку фільтра."
@@ -4401,14 +4378,8 @@
     "pidTuningDTermLowpass2Type": {
         "message": "Тип фільтра"
     },
-    "pidTuningDTermLowpassDyn": {
-        "message": "Динамічний фільтр нижніх частот Д-складової"
-    },
     "pidTuningDTermLowpassDynExpo": {
         "message": "Динамічна експоненційна крива"
-    },
-    "pidTuningDTermLowpassDynType": {
-        "message": "Тип динамічного фільтра"
     },
     "pidTuningDTermNotchFiltersGroup": {
         "message": "Режекторний фільтр D-складової"
@@ -4522,7 +4493,7 @@
         "message": "Обмеження кута для Acro Trainer"
     },
     "pidTuningAcroTrainerAngleLimitHelp": {
-        "message": "Допомагає пілотам вивчити польоти в режимі \"акро\" шляхом обмеження кута, який квадрокоптер може досягти. Дійсні обмеження становлять від 10 до 80 градусів. Цей режим повинен бути активований за допомогою перемикача на вкладці $t(tabAuxiliary.message)."
+        "message": "Допомагає пілотам вивчити польоти в режимі акро шляхом обмеження кута, на який квадрокоптер може нахилитись. Дійсні обмеження становлять від 10 до 80 градусів. Цей режим повинен бути активований за допомогою перемикача на вкладці $t(tabAuxiliary.message)."
     },
     "pidTuningIntegratedYaw": {
         "message": "Інтегроване рискання"
@@ -5451,12 +5422,20 @@
     "osdDescElementAltitude": {
         "message": "Поточна висота (блимає, коли вище порогового значення)"
     },
-    "osdTextElementAltitudeVariant1Decimal": {
-        "message": "З 1 розрядом після коми",
+    "osdTextElementAltitudeVariant1DecimalAGL": {
+        "message": "Висота над землею з 1 десятковим знаком",
         "description": "One of the variants of the altitude element of the OSD"
     },
-    "osdTextElementAltitudeVariantNoDecimal": {
-        "message": "Без десятих",
+    "osdTextElementAltitudeVariantNoDecimalAGL": {
+        "message": "Висота над землею без десяткових знаків",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariant1DecimalASL": {
+        "message": "Висота над морем з 1 десятковим знаком",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariantNoDecimalASL": {
+        "message": "Висота над морем без десяткових знаків",
         "description": "One of the variants of the altitude element of the OSD"
     },
     "osdTextElementOnTime": {
@@ -6206,6 +6185,10 @@
         "message": "Якість зв'язку",
         "description": "Text of the link quality alarm"
     },
+    "osdTimerAlarmOptionRssiDbm": {
+        "message": "RSSI дБм",
+        "description": "Text of the RSSI dBm alarm"
+    },
     "osdWarningTextArmingDisabled": {
         "message": "Взведення заборонене",
         "description": "One of the warnings that can be selected to be shown in the OSD"
@@ -6331,6 +6314,14 @@
     },
     "osdWarningRSNR": {
         "message": "Попереджає коли співвідношення сигнал\/шум нижче порогового рівня"
+    },
+    "osdWarningTextLoad": {
+        "message": "ЗАВАНТАЖЕННЯ",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningLoad": {
+        "message": "Застерігає, якщо навантаження на ЦП польотного контролера зависоке",
+        "description": "Description of one of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningTextUnknown": {
         "message": "Невідомо $1"
@@ -6669,10 +6660,7 @@
         "message": "Протокол ESC\/мотора"
     },
     "configurationEscProtocolHelp": {
-        "message": "Виберіть протокол для вашого мотора.<br>Переконайтеся, що протокол підтримується вашим електронним регулятором швидкості, цю інформацію можна знайти на веб-сайті виробника.<br><b>Будьте обережні з використанням DSHOT900 та DSHOT1200, оскільки їх підтримують не всі ESC!<\/b>"
-    },
-    "configurationEscProtocolHelpNoDSHOT1200": {
-        "message": "Виберіть свій протокол керування моторами. <br>Переконайтеся, що ваш електронний контролер швидкості ESC підтримує протокол, ця інформація має бути на веб-сайті виробника."
+        "message": "Виберіть свій протокол керування моторами. <br>Переконайтеся, що протокол підтримується вашим регулятором обертів, ця інформація має бути на вебсайті виробника."
     },
     "configurationunsyndePwm": {
         "message": "Швидкість ШІМ мотора Відокремлена від швидкості PID"
@@ -6907,6 +6895,9 @@
     },
     "pidTuningRcRateActual": {
         "message": "Чутливість центру"
+    },
+    "pidTuningAcroCenterSensitiviy": {
+        "message": "Максимальна чутливість центру"
     },
     "dialogRatesTypeTitle": {
         "message": "Зміна типу коефіцієнтів реагування"
@@ -7257,19 +7248,19 @@
         "message": "Назва файлу конфігурації:"
     },
     "firmwareFlasherRadioProtocolDescription": {
-        "message": "Виберіть радіопротокол, який ви хочете включити у цю збірку. Зверніть увагу, що це випадаючий список, але можна вибрати лише один елемент."
+        "message": "Виберіть радіопротокол, який ви хочете включити у цю збірку. Зверніть увагу, що це випадний список, але можна вибрати лише один елемент."
     },
     "firmwareFlasherTelemetryProtocolDescription": {
-        "message": "Виберіть протокол телеметрії, який ви хотіли б включити у цю збірку. Зауважте, що це випадаючий список, але можна вибрати лише один елемент. Також деякі протоколи телеметрії будуть увімкнені автоматично, незалежно від вашого вибору тут, якщо вони потрібні для радіообміну, наприклад, CRSF."
+        "message": "Виберіть протокол телеметрії, який ви хотіли б включити у цю збірку. Зауважте, що це випадний список, але можна вибрати лише один елемент. Також деякі протоколи телеметрії будуть увімкнені автоматично, незалежно від вашого вибору тут, якщо вони потрібні для радіообміну, наприклад, CRSF."
     },
     "firmwareFlasherOptionLabelTelemetryProtocolIncluded": {
         "message": "Автоматично включено"
     },
     "firmwareFlasherOptionsDescription": {
-        "message": "Оберіть загальні опції, які б ви хотіли включили до цієї збірки. Зауважте, що це випадаючий список, і можна вибрати декілька елементів. Такі речі як виправлення, наприклад, відеопередавача AKK, знаходяться в цьому списку."
+        "message": "Оберіть загальні опції, які б ви хотіли включили до цієї збірки. Зауважте, що це випадний список, і можна вибрати декілька елементів. Такі речі як виправлення, наприклад, відеопередавача AKK, знаходяться в цьому списку."
     },
     "firmwareFlasherMotorProtocolDescription": {
-        "message": "Виберіть протокол керування моторами (електронними контролерами швидкості), який ви хотіли б додати до цієї збірки. Зверніть увагу, що в випадаючому меню можна вибрати лише один елемент."
+        "message": "Виберіть протокол керування моторами (електронними контролерами швидкості), який ви хотіли б додати до цієї збірки. Зверніть увагу, що в випадному меню можна вибрати лише один елемент."
     },
     "firmwareFlasherBranchDescription": {
         "message": "Особливо корисно для розробників, ви можете вибрати запит на злиття (merged pull request), вказати коміт SHA або вказати \"ще не злитий\" запит на злиття, ввівши знак \"#\" за яким слідує номер запиту на злиття, наприклад #1234 (це стислий запис для гілки 'pull\/1234\/head')."

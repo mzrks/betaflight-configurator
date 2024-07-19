@@ -31,6 +31,22 @@
     "dontShowAgain": {
         "message": "No ho mostris més"
     },
+    "pwaOnNeedRefreshTitle": {
+        "message": "Cal actualitzar l'aplicació",
+        "description": "Title of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnNeedRefreshText": {
+        "message": "Heu d'actualitzar la pàgina per obtenir els darrers canvis. En actualitzar-lo ara, es tornarà a carregar la pàgina i perdràs els canvis no desats i avortarà qualsevol operació en curs.<br><br>Vols actualitzar-la ara? També podeu ignorar aquest missatge i actualitzar la pàgina manualment més tard.",
+        "description": "Text of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnOffilenReadyTitle": {
+        "message": "L'aplicació està preparada per utilitzar-se fora de línia",
+        "description": "Title of the window that appears when the app is ready to be installed and used offline"
+    },
+    "pwaOnOffilenReadyText": {
+        "message": "Podeu instal·lar-lo com a aplicació autònoma al vostre dispositiu si voleu. Cerqueu l'opció a la barra d'adreces o al menú del vostre navegador.",
+        "description": "Text of the window that appears when the app is ready to be installed and used offline"
+    },
     "operationNotSupported": {
         "message": "Aquesta operació no és compatible amb el teu maquinari."
     },
@@ -49,12 +65,36 @@
     "disconnect": {
         "message": "Desconnectar"
     },
+    "portsSelectNoSelection": {
+        "message": "Selecciona el dispositiu",
+        "description": "Text for the option to select a device in the port selection dropdown"
+    },
     "portsSelectManual": {
         "message": "Selecció Manual"
+    },
+    "portsSelectNone": {
+        "message": "Connexió no disponible"
     },
     "portsSelectVirtual": {
         "message": "Mode virtual (experimental)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
+    },
+    "portsSelectPermission": {
+        "message": "--- No trobo el meu dispositiu USB ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access the device."
+    },
+    "portsSelectPermissionBluetooth": {
+        "message": "--- No trobo el meu dispositiu Bluetooth---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a Bluetooth device."
+    },
+    "bluetoothConnected": {
+        "message": "Connecta't al dispositiu Bluetooth: $1"
+    },
+    "bluetoothConnectionType": {
+        "message": "Tipus connexió Bluetooth: $1"
+    },
+    "bluetoothConnectionError": {
+        "message": "Error Bluetooth: $1"
     },
     "virtualMSPVersion": {
         "message": "Versió de microprogramari virtual"
@@ -106,9 +146,9 @@
         "message": "Mostra tots els dispositius sèrie (per a fabricants o desenvolupament)",
         "description": "Do not filter serial devices using VID\/PID values (for manufacturers or development)"
     },
-    "useMdnsBrowser": {
-        "message": "Utilitzeu el descobriment de dispositius del navegador mDNS a la xarxa (experimental)",
-        "description": "Enable mDNS Browser Device discovery in PortHandler (experimental)"
+    "showManualMode": {
+        "message": "Activa el mode de connexió manual",
+        "description": "Text for the option to enable or disable manual connection mode"
     },
     "showVirtualMode": {
         "message": "Activa el mode de connexió virtual",
@@ -298,6 +338,10 @@
     },
     "logActionShow": {
         "message": "Mostrar Log"
+    },
+    "fileSystemPickerFiles": {
+        "message": "{{typeof}} arxius",
+        "description": "Text for the file picker dialog, showing the type of files selected. The parameter can be HEX, TXT, etc."
     },
     "serialErrorFrameError": {
         "message": "Error de connexió de port sèrie: trames dolentes"
@@ -723,12 +767,6 @@
     "initialSetupRebootBootloaderText": {
         "message": "Torna a iniciar en mode <strong>carregador d'arrencada\/DFU<\/strong>."
     },
-    "initialSetupBackupSuccess": {
-        "message": "Còpia de seguretat desada <span class=\"message-positive\">correctament<\/span>"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "Configuració restaurada <span class=\"message-positive\">correctament<\/span>"
-    },
     "initialSetupButtonResetZaxis": {
         "message": "Resetejar eix Z, offset: 0 graus"
     },
@@ -881,9 +919,9 @@
         "message": "No es detecta cap senyal de receptor vàlid",
         "description": "Message that pops up to describe the RX_FAILSAFE arming disable flag"
     },
-    "initialSetupArmingDisableFlagsTooltipBAD_RX_RECOVERY": {
-        "message": "El receptor acaba de recuperar-se d'un Failsafe per falla del receptor, però l’interruptor d'armat està activat",
-        "description": "Message that pops up to describe the BAD_RX_RECOVERY arming disable flag"
+    "initialSetupArmingDisableFlagsTooltipNOT_DISARMED": {
+        "message": "El teu receptor acaba de recuperar-se d'un Failsafe per falla del receptor, però l’interruptor d'armat està activat",
+        "description": "Message that pops up to describe the NOT_DISARMED arming disable flag"
     },
     "initialSetupArmingDisableFlagsTooltipBOXFAILSAFE": {
         "message": "El interruptor de \"FAILSAFE\" s'ha activat",
@@ -1308,13 +1346,13 @@
         "message": "Aquesta opció configura el mesclador per a que la direcció de motor estigui revertida i, en conseqüència, les seves hèlix. <strong>Advertència:<\/strong> això no vol dir que la direcció de motor s'inverteixi. Per aconseguir-ho, cal utilitzar l'eina de configuració per als seus ESCs o canviar l'ordre del cablejat del motor. A més, assegureu-vos de consultar que les direccions dels motors coincideixen amb les del diagrama abans d'armar."
     },
     "configurationAutoDisarmDelay": {
-        "message": "Desarma els motors després de [segons] (Requereix de la característica de MOTOR_STOP)"
+        "message": "Desarma els motors després del retard [segons]"
     },
-    "configurationDisarmKillSwitch": {
-        "message": "Desarmeu els motors independentment del valor de l'accelerador (quan ARM està configurat a la pestanya Modes a través del canal AUX)"
+    "configurationAutoDisarmDelayHelp": {
+        "message": "Desarma els motors després del retard establert [segons] (requereix la funció MOTOR_STOP)"
     },
-    "configurationDisarmKillSwitchHelp": {
-        "message": "L'armat sempre està desactivat quan l'accelerador no és a baix del tot. Aneu amb compte ja que podríeu desarmar accidentalment amb un interruptor mentre voleu amb aquesta opció activa."
+    "configurationGyroCalOnFirstArm": {
+        "message": "Calibra el Gyro al primer braç"
     },
     "configurationDigitalIdlePercent": {
         "message": "Motor inactiu (%, estàtic)"
@@ -1707,9 +1745,6 @@
         "message": "<b>D<\/b>erivada",
         "description": "Table header of the D Min feature in the PIDs tab"
     },
-    "pidTuningDMinDisabledNote": {
-        "message": "<strong>Nota:<\/strong>La funció D Max està desactivada i els seus paràmetres estan ocults. Per utilitzar D Max, activa-la a $t(pidTuningPidSettings.message)."
-    },
     "pidTuningDMinFeatureTitle": {
         "message": "Configuració d'amortiment dinàmic \/ D Max",
         "description": "Title for the options panel for the D Max feature"
@@ -1784,9 +1819,6 @@
     "receiverRcSmoothingFilter": {
         "message": "Filtre"
     },
-    "receiverRcSmoothingTypeHelp": {
-        "message": "Tipus de suavitzat RC utilitzat"
-    },
     "rcSmoothingSetpointCutoffHelp": {
         "message": "La freqüència de tall en Hz utilitzada pel filtre d’entrada. Si utilitzeu valors inferiors, obtindreu entrades més suaus i són més apropiats per a protocols de receptor més lents. La majoria dels usuaris haurien de deixar això al 0 corresponent a \"Auto\"."
     },
@@ -1795,12 +1827,6 @@
     },
     "rcSmoothingChannelsSmoothedHelp": {
         "message": "El suavitzat de canals s’aplica a"
-    },
-    "rcSmoothingFeedforwardTypeHelp": {
-        "message": "El tipus de mètode de filtratge utilitzat per l'entrada derivada. A partir del 4.2 es recomana el valor predeterminat de \"Auto\". Per a 4.1 i versions anteriors, la majoria d'usuaris han d'utilitzar el valor predeterminat de \"BIQUAD\", ja que proporciona un bon equilibri entre suavitat i retard. \"PT1\" redueix lleugerament el retard però proporciona menys suavitat."
-    },
-    "rcSmoothingSetpointTypeHelp": {
-        "message": "El tipus de mètode de filtratge utilitzat per l'entrada. La majoria dels usuaris han d'utilitzar el valor predeterminat de \"BIQUAD\" ja que proporciona un bon equilibri entre suavitat i retard. \"PT1\" redueix lleugerament el retard però proporciona menys suavitat."
     },
     "receiverRcSmoothingSetpointManual": {
         "message": "Selecciona si la freqüència de tall del filtre d’entrada es calcula de forma automàtica (recomanada) o seleccionada manualment per l’usuari. L'ús de \"Manual\" no es recomana per als protocols del receptor com Crossfire, que pot canviar en vol."
@@ -1814,47 +1840,11 @@
     "receiverRcSmoothingFeedforwardCutoff": {
         "message": "FeedForward Cutoff Frequëncia"
     },
-    "receiverRcSetpointType": {
-        "message": "Escull tipus de filtre"
-    },
     "receiverRcFeedforwardType": {
         "message": "Feedforward Filter Tipus"
     },
-    "receiverRcSmoothingFeedforwardTypeOff": {
-        "message": "Desactivat"
-    },
     "receiverRcSmoothingFeedforwardTypeAuto": {
         "message": "Auto"
-    },
-    "receiverRcSmoothingChannel": {
-        "message": "Canals suavitzats"
-    },
-    "receiverRcInterpolation": {
-        "message": "Interpolació RC"
-    },
-    "receiverRcInterpolationHelp": {
-        "message": "Els sistemes TX\/RX no són tan ràpids com els PID loops. Això vol dir que el PID loop té buits d'informació en els sistemes RC. Aquesta opció activa la interpolació de l'entrada RC mentre no es reben RC frames. Aquesta opció també ofereix una P i una D més netes ja que no hi ha rampes en l'entrada de control."
-    },
-    "receiverRcInterpolationIntervalHelp": {
-        "message": "Interval del mode d'interpolació manual RC en miŀlisegons."
-    },
-    "receiverRcInterpolationOff": {
-        "message": "Off"
-    },
-    "receiverRcSmoothingType": {
-        "message": "Tipus de suavització"
-    },
-    "receiverRcInterpolationDefault": {
-        "message": "Preset"
-    },
-    "receiverRcInterpolationAuto": {
-        "message": "Auto"
-    },
-    "receiverRcInterpolationManual": {
-        "message": "Manual"
-    },
-    "receiverRcInterpolationInterval": {
-        "message": "Interval d'Interpolació RC [ms]"
     },
     "receiverRcSmoothingMode": {
         "message": "Tipus de suavització"
@@ -2464,18 +2454,6 @@
     },
     "adjustmentsHelp": {
         "message": "Configureu els interruptors d'ajust. Consulteu la secció \"Ajustaments de vol\" del manual per obtenir-ne més detalls. Els canvis que realitzen les funcions d'ajust no es guarden automàticament. Hi ha 4 ranures (slots). Cada interruptor utilitzat per fer ajustaments simultanis requereix l'ús exclusiu d'una ranura."
-    },
-    "adjustmentSlotsHelp": {
-        "message": "Hi ha 4 ranures. Cada commutador usat per fer ajustaments simultàniament requereix un ús exclusiu d’una ranura."
-    },
-    "adjustmentsExamples": {
-        "message": "Exemples:"
-    },
-    "adjustmentsExample1": {
-        "message": "Utilitza la ranura 1 i un switch de tres posicions a l'AUX1 per seleccionar entre Pitch\/Roll P, I i D i un altre switch de tres posicions a l'AUX2 per incrementar o disminuir el valor mantenint amunt o avall."
-    },
-    "adjustmentsExample2": {
-        "message": "Utilitza la ranura 2 i un switch de 3 posicions a l'AUX4 per a habilitat la selecció de perfil de rate al mateix switch de 3 posicions del mateix canal."
     },
     "adjustmentsColumnEnable": {
         "message": "si habilitat"
@@ -3399,7 +3377,7 @@
         "message": "Seleccioneu tipus de versió per veure les controladores disponibles."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Selecciona la teva placa per veure les versions de firmware online disponibles - Selecciona el firmware correcte que s'adeqüi a la teva placa."
+        "message": "Selecciona la teva placa per veure les versions de programari online disponibles - Selecciona el programari correcte per a la teva placa."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
         "message": "El configurador de Betaflight admet la carga de programari nificat amb les configuracions específiques de la placa respectiva en un sol pas.<br><br>El concepte d'objectius unificats significa que es pot utilitzar el mateix fitxer .hex de microprogramari per a totes les plaques que utilitzen la mateixa MCU.<br> <br>Betaflight 4.4 presenta <strong>Cloud Build<\/strong><br><br>Amb <strong>Cloud Build<\/strong> hem de definir les opcions de maquinari presents a la vostra compilació.<br><br>Per fer les diferents plaques funcionen amb el mateix microprogramari, un fitxer de configuració específic es desplega al costat del microprogramari quan es mostra un Unified Target.<br><br>Amb Local build podeu carregar un fitxer de configuració de destinació unificat o triar un tauler abans de carregar un microprogramari. .hex.<br><br>Si trobeu problemes amb el microprogramari, considereu unir-vos a Discord o obrir un <a href=\"https:\/\/github.com\/betaflight\/betaflight\/issues\" target=\"_blank\" rel =\"noopener noreferrer\">problema<\/a>."
@@ -3414,7 +3392,7 @@
         "message": "Flasheja al connectar"
     },
     "firmwareFlasherFlashOnConnectDescription": {
-        "message": "Si intenteu flashejar el tauler automàticament (activat pel port sèrie recentment detectat).<br \/><br \/><span class=\"message-negative\">ADVERTIMENT<\/span>: aquesta funció desactiva la funció de detecció automàtica i còpia de seguretat."
+        "message": "Intent de flashejar la placa automàticament (activat pel nou port sèrie recentment detectat).<br \/><br \/><span class=\"message-negative\">ADVERTIMENT<\/span>: aquesta funció desactiva la funció de detecció automàtica i còpia de seguretat."
     },
     "firmwareFlasherFullChipErase": {
         "message": "Esborrat total del xip"
@@ -3557,6 +3535,9 @@
     "firmwareFlasherNoFirmwareSelected": {
         "message": "<b>No s'ha seleccionat  un firmware per carregar<\/b>"
     },
+    "firmwareFlasherNoTargetsLoaded": {
+        "message": "No s'ha carregat cap plataforma"
+    },
     "firmwareFlasherNoValidPort": {
         "message": "<span class=\"message-negative\">Selecciona un port sèrie vàlid<\/span>"
     },
@@ -3589,10 +3570,10 @@
         "message": "Continuar"
     },
     "firmwareFlasherDetectBoardButton": {
-        "message": "Auto detectar"
+        "message": "Detectar"
     },
     "firmwareFlasherDetectBoardDescriptionHint": {
-        "message": "La detecció automàtica només funciona quan no es troba en mode DFU i quan la comunicació MSP funciona. De vegades cal tornar-ho a provar algunes vegades o fins i tot tornar a connectar l'USB. Proveu de connectar-vos amb la normalitat primer, ja que podríeu haver oblidat aplicar els valors predeterminats personalitzats. Reinicieu després de parpellejar: torneu a connectar l'USB."
+        "message": "La detecció només funciona quan no es troba en mode DFU i quan la comunicació MSP funciona. De vegades cal tornar-ho a provar algunes vegades o fins i tot tornar a connectar l'USB. Proveu de connectar-vos normalment primer, ja que podríeu haver oblidat aplicar els valors predeterminats personalitzats. Reinicieu després de flashejar: torneu a connectar l'USB."
     },
     "firmwareFlasherDetectBoardQuery": {
         "message": "Seleccioneu l'informació de la placa per preseleccionar el firmware adequat"
@@ -4177,30 +4158,6 @@
         "message": "Augmenta tots els paràmetres PID per igual. No canvieu aquest control lliscant tret que us quedeu sense ajustar en els altres lliscadors. Normalment, això només es necessita per a quads amb baixa autoritat o moment d’inèrcia elevat (MoI) com les versions X-Class o cinelifter. Un excés de guany mestre pot provocar oscil·lacions trillants o motors calents.",
         "description": "Master Gain tuning slider helpicon message"
     },
-    "pidTuningPDRatioSlider": {
-        "message": "Balanç PD:",
-        "description": "PD balance tuning slider label"
-    },
-    "pidTuningPDRatioSliderHelp": {
-        "message": "Una D relativament alta amortirà la resposta del stick i pot fer que els motors estiguin calents, però haurien d’ajudar a controlar les oscil·lacions P i poden millorar el propwash.<br \/><br \/>Relativament una D baixa proporciona una resposta més ràpida al stick, però pot debilitar la gestió del propwash i la seva reacció devant de forçes externes (vent).",
-        "description": "D_term tuning slider helpicon message"
-    },
-    "pidTuningPDGainSlider": {
-        "message": "Guany P i D:",
-        "description": "P and D Gain tuning slider label"
-    },
-    "pidTuningPDGainSliderHelp": {
-        "message": "Valors baixos de P i D donarà lloc a motors més frescos, però també provocará una oscil·lació de propwash. Un valor massa baix pot fer que el quad sigui inestable.<br \/><br \/>els terms de P i D treballen junts per reduir el propwash.<br \/><br \/>Valors més alts augmentaran la calor del motor i podrien augmentar les oscil·lacions durant un vol cap endavant suau per un major augment del guany de D term.",
-        "description": "P and D gain tuning slider helpicon message"
-    },
-    "pidTuningResponseSliderLegacy": {
-        "message": "Guany de resposta del stick:",
-        "description": "Response tuning slider label"
-    },
-    "pidTuningResponseSliderLegacyHelp": {
-        "message": "Valors més baixos de FF empitjoraran la resposta del stick i poden provocar un rebot lent al final d'un flip o roll a causa que el quad retarda massa els sticks i el I-term puja donan lloc a un \"Rebot de I-term\".<br \/><br \/>Valors de FF més alts donaran respostes del stick més ràpides en moviments forts. Els valors de FF excessivament alts poden provocar desbordaments i rebots ràpids al final d'una flip o roll.<br \/><br \/>Nota:<br \/>La característica I-term Relax pot evitar el I-term I acabi amunt en el moviment del stick per quads amb baixa autoritat o si s'utilitzen guanys de resposta de stick baixos.",
-        "description": "Stick response gain tuning slider helpicon message"
-    },
     "pidTuningDGainSlider": {
         "message": "Amortiment:<br \/><i><small>Guany D<\/small><\/i>",
         "description": "D Gain (Damping) tuning slider label"
@@ -4282,17 +4239,11 @@
     "pidTuningLowpassFilterType": {
         "message": "Tipus de filtre"
     },
-    "pidTuningGyroLowpassDyn": {
-        "message": "Filtre Passa-baixos dinàmic del Giro"
-    },
     "pidTuningMinCutoffFrequency": {
         "message": "Freqüència de tall Minima [Hz]"
     },
     "pidTuningMaxCutoffFrequency": {
         "message": "Freqüència de tall Máxima [Hz]"
-    },
-    "pidTuningGyroLowpassDynType": {
-        "message": "Tipus filtre Passa-baixos dinàmic 1 del Giro"
     },
     "pidTuningGyroLowpass2": {
         "message": "Passa-baix 2 Giro"
@@ -4352,9 +4303,6 @@
     "pidTuningDynamicNotchRange": {
         "message": "Rang del filtre dinàmic de banda eliminada (Notch)"
     },
-    "pidTuningDynamicNotchWidthPercent": {
-        "message": "Percentatge de l'amplada del filtre Notch (banda eliminada) dinàmic"
-    },
     "pidTuningDynamicNotchQ": {
         "message": "Factor Q"
     },
@@ -4369,9 +4317,6 @@
     },
     "pidTuningDynamicNotchRangeHelp": {
         "message": "El Notch (banda eliminada) dinàmic té tres rangs de freqüència en els quals pot funcionar: BAIX (80-330hz) per a quads revolucionats de 6 o més polzades, MITJA (140-550hz) per a un quad normal de 5 polzades, ALT (230-800Hz) per quads molt revolucionats de 2,5-3 polzades. L'opció AUTO selecciona l'abast en funció del valor de la freqüència màxima de tall del filtre dinàmic passa-baixos de Giro 1."
-    },
-    "pidTuningDynamicNotchWidthPercentHelp": {
-        "message": "Estableix l'amplada entre dos filtres de banda eliminada (Notch) dinàmics. Si es situa a 0, es desactivarà el segon filtre Notch i es reduirà el retard del filtre, però pot augmentar la temperatura del motor."
     },
     "pidTuningDynamicNotchQHelp": {
         "message": "El factor Q ajusta quan ample o estret es son els filtres dinàmics Notch. Valors elevats els fan més estrets i acurats, valors baixos els fa més amples y alts. Tenir un valor molt baix augmentarà considerablement el retard del filtre."
@@ -4441,14 +4386,8 @@
     "pidTuningDTermLowpass2Type": {
         "message": "Tipus de filtre"
     },
-    "pidTuningDTermLowpassDyn": {
-        "message": "Filtre Passa-baixos dinàmic del D Term"
-    },
     "pidTuningDTermLowpassDynExpo": {
         "message": "Expo de la corba dinàmica"
-    },
-    "pidTuningDTermLowpassDynType": {
-        "message": "Tipus de filtre dinàmic"
     },
     "pidTuningDTermNotchFiltersGroup": {
         "message": "Filtres Notch D Term"
@@ -5491,12 +5430,20 @@
     "osdDescElementAltitude": {
         "message": "Altitud actual (pampallugeja por sobre del nivell d'alarma)"
     },
-    "osdTextElementAltitudeVariant1Decimal": {
-        "message": "Amb 1 decimal",
+    "osdTextElementAltitudeVariant1DecimalAGL": {
+        "message": "AGL amb 1 decimal",
         "description": "One of the variants of the altitude element of the OSD"
     },
-    "osdTextElementAltitudeVariantNoDecimal": {
-        "message": "Sense decimals",
+    "osdTextElementAltitudeVariantNoDecimalAGL": {
+        "message": "AGL sense decimals",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariant1DecimalASL": {
+        "message": "ASL amb 1 decimal",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariantNoDecimalASL": {
+        "message": "ASL sense decimals",
         "description": "One of the variants of the altitude element of the OSD"
     },
     "osdTextElementOnTime": {
@@ -6246,6 +6193,10 @@
         "message": "Qualitat enllaç",
         "description": "Text of the link quality alarm"
     },
+    "osdTimerAlarmOptionRssiDbm": {
+        "message": "RSSI dBm",
+        "description": "Text of the RSSI dBm alarm"
+    },
     "osdWarningTextArmingDisabled": {
         "message": "Armant des-habilitat",
         "description": "One of the warnings that can be selected to be shown in the OSD"
@@ -6371,6 +6322,14 @@
     },
     "osdWarningRSNR": {
         "message": "Avisa quan el RSNR està per sota del ajust d'alarma"
+    },
+    "osdWarningTextLoad": {
+        "message": "CARREGAR",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningLoad": {
+        "message": "Avisa si la càrrega de CPU del controlador de vol és massa alta",
+        "description": "Description of one of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningTextUnknown": {
         "message": "Desconegut $1"
@@ -6709,9 +6668,6 @@
         "message": "Protocol ESC\/Motor"
     },
     "configurationEscProtocolHelp": {
-        "message": "Seleccioneu el vostre protocol de motor.<br>Assegureu-vos de verificar que el protocol és compatible amb el vostre ESC, aquesta informació ha de trobar-se al lloc web del fabricant. <br><b> Tingueu cura de fer servir DSHOT900 i DSHOT1200, ja que no són molts els ESC que ho admeten!<\/b>"
-    },
-    "configurationEscProtocolHelpNoDSHOT1200": {
         "message": "Seleccioneu el vostre protocol de motor.<br>Assegureu-vos de verificar que el protocol és compatible amb el vostre ESC, aquesta informació ha de trobar-se al lloc web dels fabricants."
     },
     "configurationunsyndePwm": {
@@ -6947,6 +6903,9 @@
     },
     "pidTuningRcRateActual": {
         "message": "Sensibilitat del centre"
+    },
+    "pidTuningAcroCenterSensitiviy": {
+        "message": "Sensibilitat del centre máxima"
     },
     "dialogRatesTypeTitle": {
         "message": "Canvi de tipus de Rates"
@@ -7306,7 +7265,7 @@
         "message": "Inclòs automàticament"
     },
     "firmwareFlasherOptionsDescription": {
-        "message": "Seleccioneu les opcions genèriques que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un menú desplegable i que es poden seleccionar diversos elements. Elements com ara correccions, p. AKK VTX, s'inclouen aquí."
+        "message": "Seleccioneu les opcions genèriques que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un desplegable i es poden seleccionar diversos elements. Elements com ara correccions, p. AKK VTX, s'inclouen aquí."
     },
     "firmwareFlasherMotorProtocolDescription": {
         "message": "Seleccioneu el protocol motor (ESC) que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un desplegable, però només es pot seleccionar un element."

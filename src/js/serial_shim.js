@@ -1,6 +1,6 @@
 import CONFIGURATOR from "./data_storage";
-import serialNWJS from "./serial.js";
 import serialWeb from "./webSerial.js";
-import { isWeb } from "./utils/isWeb";
+import BT from "./protocols/bluetooth.js";
+import virtualSerial from "./virtualSerial.js";
 
-export let serialShim = () => CONFIGURATOR.virtualMode ? serialNWJS : isWeb() ? serialWeb : serialNWJS;
+export let serialShim = () => CONFIGURATOR.virtualMode ? virtualSerial: CONFIGURATOR.bluetoothMode ? BT : serialWeb;

@@ -61,7 +61,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'src/index.html'),
-                receiver_msp: resolve(__dirname, 'src/receiver_msp/index.html'),
+                receiver_msp: resolve(__dirname, 'src/receiver_msp/receiver_msp.html'),
             },
         },
     },
@@ -84,7 +84,7 @@ export default defineConfig({
             hook: "writeBundle",
         }),
         VitePWA({
-            registerType: 'autoUpdate',
+            registerType: 'prompt',
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mcm}'],
                 // 5MB
@@ -92,7 +92,7 @@ export default defineConfig({
             },
             includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
             manifest: {
-                name: pkg.productName,
+                name: pkg.displayName,
                 short_name: pkg.productName,
                 description: pkg.description,
                 theme_color: '#ffffff',
@@ -120,8 +120,10 @@ export default defineConfig({
     },
     server: {
         port: 8000,
+        strictPort: true,
     },
     preview: {
         port: 8080,
+        strictPort: true,
     },
 });

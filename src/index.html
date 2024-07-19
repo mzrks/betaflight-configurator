@@ -7,7 +7,7 @@
     <script type="module" src="/src/js/browserMain.js"></script>
 
     <title>Betaflight</title>
-    <meta name="description" content="Configurator for betaflight firmware">
+    <meta name="description" content="Configuration and management tool for the Betaflight flight control firmware">
     <link rel="icon" href="/images/pwa/favicon.ico">
     <link rel="apple-touch-icon" href="/images/pwa/apple-touch-icon.png" sizes="128x128">
     <meta name="theme-color" content="#eea600">
@@ -26,7 +26,14 @@
             :firmware-id="FC.CONFIG.flightControllerIdentifier"
             :hardware-id="FC.CONFIG.hardwareName"
         ></betaflight-logo>
-        <port-picker></port-picker>
+        <port-picker
+            v-model="PortHandler.portPicker"
+            :connected-serial-devices="PortHandler.currentSerialPorts"
+            :connected-usb-devices="PortHandler.currentUsbPorts"
+            :show-virtual-option="PortHandler.showVirtualMode"
+            :show-manual-option="PortHandler.showManualMode"
+            :disabled="PortHandler.portPickerDisabled"
+        ></port-picker>
         <div class="header-wrapper">
             <div id="quad-status_wrapper">
                 <battery-icon
@@ -35,11 +42,13 @@
                     :vbatmaxcellvoltage="FC.BATTERY_CONFIG.vbatmaxcellvoltage"
                     :vbatwarningcellvoltage="FC.BATTERY_CONFIG.vbatwarningcellvoltage"
                     :batteryState="FC.BATTERY_STATE?.batteryState"
+                    :vbatcellcount="FC.BATTERY_STATE?.cellCount"
                 >
                 </battery-icon>
                 <battery-legend
                     :voltage="FC.ANALOG.voltage"
                     :vbatmaxcellvoltage="FC.BATTERY_CONFIG.vbatmaxcellvoltage"
+                    :vbatcellcount="FC.BATTERY_STATE?.cellCount"
                 ></battery-legend>
                 <div class="bottomStatusIcons">
                     <div class="armedicon cf_tip" i18n_title="mainHelpArmed"></div>
@@ -72,14 +81,14 @@
             <div id="dataflash_wrapper_global">
                 <div class="noflash_global" align="center" i18n="sensorDataFlashNotFound"></div>
                 <ul class="dataflash-contents_global">
+                    <div class="legend" i18n="sensorDataFlashFreeSpace"></div>
                     <li class="dataflash-free_global">
-                        <div class="legend" i18n="sensorDataFlashFreeSpace"></div>
                     </li>
                 </ul>
                 <div id="expertMode" align="center">
                     <label>
                         <input name="expertModeCheckbox" class="togglesmall" type="checkbox"/>
-                        <span i18n="expertMode"></span>
+                        <span i18n="expertMode" class="expertModeText"></span>
                     </label>
                 </div>
             </div>

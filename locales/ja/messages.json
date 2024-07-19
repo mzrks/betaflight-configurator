@@ -31,6 +31,22 @@
     "dontShowAgain": {
         "message": "今後表示しない"
     },
+    "pwaOnNeedRefreshTitle": {
+        "message": "アプリケーションの更新が必要です",
+        "description": "Title of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnNeedRefreshText": {
+        "message": "最新の変更を取得するには、ページを更新する必要があります。今すぐ更新すると、ページが再読み込みされ、保存されていない変更が消失し、進行中の操作は中止されます。<br><br>今すぐ更新しますか？このメッセージを消去し、後で手動でページを更新することもできます。",
+        "description": "Text of the window that appears when the app needs to be refreshed to get the latest changes"
+    },
+    "pwaOnOffilenReadyTitle": {
+        "message": "アプリケーションはオフラインでも使用可能です",
+        "description": "Title of the window that appears when the app is ready to be installed and used offline"
+    },
+    "pwaOnOffilenReadyText": {
+        "message": "必要に応じてスタンドアロンのアプリケーションとしてインストールすることもできます。ブラウザのアドレスバー、またはメニューからオプションを検索してください。",
+        "description": "Text of the window that appears when the app is ready to be installed and used offline"
+    },
     "operationNotSupported": {
         "message": "この機能はお使いのハードウェアではサポートされていません。"
     },
@@ -49,12 +65,36 @@
     "disconnect": {
         "message": "切断"
     },
+    "portsSelectNoSelection": {
+        "message": "デバイスを選択",
+        "description": "Text for the option to select a device in the port selection dropdown"
+    },
     "portsSelectManual": {
         "message": "手動選択"
+    },
+    "portsSelectNone": {
+        "message": "ネットワーク接続不可"
     },
     "portsSelectVirtual": {
         "message": "バーチャル接続モード (テスト中)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
+    },
+    "portsSelectPermission": {
+        "message": "--- USBデバイスが見つかりません ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access the device."
+    },
+    "portsSelectPermissionBluetooth": {
+        "message": "--- Bluetoothデバイスが見つかりません ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a Bluetooth device."
+    },
+    "bluetoothConnected": {
+        "message": "Bluetoothデバイスに接続: $1"
+    },
+    "bluetoothConnectionType": {
+        "message": "Bluetooth 接続タイプ: $1"
+    },
+    "bluetoothConnectionError": {
+        "message": "Bluetooth エラー: $1"
     },
     "virtualMSPVersion": {
         "message": "バーチャルファームウェアバージョン"
@@ -106,9 +146,9 @@
         "message": "すべてのシリアルデバイスを表示 (ベンダーまたはデベロッパー向け)",
         "description": "Do not filter serial devices using VID\/PID values (for manufacturers or development)"
     },
-    "useMdnsBrowser": {
-        "message": "mDNSブラウザを使用したネットワーク上でのデバイス検出 (試験運用)",
-        "description": "Enable mDNS Browser Device discovery in PortHandler (experimental)"
+    "showManualMode": {
+        "message": "手動接続モード 有効",
+        "description": "Text for the option to enable or disable manual connection mode"
     },
     "showVirtualMode": {
         "message": "バーチャル接続モード 有効",
@@ -290,6 +330,10 @@
     },
     "logActionShow": {
         "message": "ログ表示"
+    },
+    "fileSystemPickerFiles": {
+        "message": "{{typeof}} ファイル",
+        "description": "Text for the file picker dialog, showing the type of files selected. The parameter can be HEX, TXT, etc."
     },
     "serialErrorFrameError": {
         "message": "シリアル接続エラー: フレーム長 不良"
@@ -715,12 +759,6 @@
     "initialSetupRebootBootloaderText": {
         "message": "<strong>ブートローダー \/ DFU<\/strong> モードで再起動します。"
     },
-    "initialSetupBackupSuccess": {
-        "message": "バックアップが<span class=\"message-positive\">正常<\/span>に保存されました"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "設定のリストアが<span class=\"message-positive\">成功<\/span>しました"
-    },
     "initialSetupButtonResetZaxis": {
         "message": "リセット Z 軸、オフセット: 0 度"
     },
@@ -873,9 +911,9 @@
         "message": "有効な受信機からの信号が検出されません",
         "description": "Message that pops up to describe the RX_FAILSAFE arming disable flag"
     },
-    "initialSetupArmingDisableFlagsTooltipBAD_RX_RECOVERY": {
-        "message": "受信機はフェイルセーフから回復したばかりですが、アームスイッチはオンのままです",
-        "description": "Message that pops up to describe the BAD_RX_RECOVERY arming disable flag"
+    "initialSetupArmingDisableFlagsTooltipNOT_DISARMED": {
+        "message": "受信機はフェイルセーフから回復したものの、アームスイッチがオンのままになっています",
+        "description": "Message that pops up to describe the NOT_DISARMED arming disable flag"
     },
     "initialSetupArmingDisableFlagsTooltipBOXFAILSAFE": {
         "message": "「フェイルセーフ」スイッチが有効です",
@@ -1300,13 +1338,13 @@
         "message": "このオプションは、モーター回転方向の構成を逆転 (リバース) させプロペラを回すよう、ミキサー設定を行います。\n<strong>警告:<\/strong> これはモーターそのもののの回転方向を逆転させるわけでありません。ESC設定ツールを使用するか、ESCモーターの配線順序を切り替えて構成変更してください。また、プロペラを用いモーターが上図に示す方向に回転していることを確認してから、アームを解除してください。"
     },
     "configurationAutoDisarmDelay": {
-        "message": "設定後にモーターをディスアーム [seconds] (MOTOR_STOP機能必須)"
+        "message": "指定秒数経過後にモーターをディスアーム [seconds]"
     },
-    "configurationDisarmKillSwitch": {
-        "message": "スロットル値に関係なくモーターをディスアーム<br \/> (ARMが [モード] タブのAUXチャンネルで設定されている場合)"
+    "configurationAutoDisarmDelayHelp": {
+        "message": "遅延時間設定後にモーターをディスアーム [seconds] (MOTOR_STOP機能必須)"
     },
-    "configurationDisarmKillSwitchHelp": {
-        "message": "スロットルが低位置でない場合、アーミングは常に無効となります。 飛行中にオプション有効スイッチを、誤って解除する可能性がありますので注意してください。"
+    "configurationGyroCalOnFirstArm": {
+        "message": "初回アーム時にジャイロキャリブレーションを実施"
     },
     "configurationDigitalIdlePercent": {
         "message": "モーターアイドル ( %, static)"
@@ -1699,9 +1737,6 @@
         "message": "<b>D<\/b>erivative",
         "description": "Table header of the D Min feature in the PIDs tab"
     },
-    "pidTuningDMinDisabledNote": {
-        "message": "<strong>注:<\/strong> D Max機能は無効になり、そのパラメーターは非表示になります。D Max機能を使用するには $t(pidTuningPidSettings.message) で有効にしてください。"
-    },
     "pidTuningDMinFeatureTitle": {
         "message": "動的ダンピング \/ D Max 設定",
         "description": "Title for the options panel for the D Max feature"
@@ -1776,9 +1811,6 @@
     "receiverRcSmoothingFilter": {
         "message": "フィルター"
     },
-    "receiverRcSmoothingTypeHelp": {
-        "message": "使用するRCスムージングタイプ"
-    },
     "rcSmoothingSetpointCutoffHelp": {
         "message": "セットポイントフィルターで使用されるカットオフ周波数(Hz)。値を小さくすると入力信号がスムーズとなり、受信機プロトコルの通信が遅延する際に適切に設定できます。ほとんどのユーザーは、「自動」となる0としてください。"
     },
@@ -1787,12 +1819,6 @@
     },
     "rcSmoothingChannelsSmoothedHelp": {
         "message": "適用するスムージングチャンネル"
-    },
-    "rcSmoothingFeedforwardTypeHelp": {
-        "message": "フィードフォワードに使用されるフィルタリング方法のタイプ。BF4.2以降、デフォルト値の『自動』が推奨されます。BF4.1以前の場合、ほとんどのユーザはスムーズさと遅延のバランスが良いため、デフォルト値の『BIQUAD』の使用してください。『PT1』は遅延をわずかに減少させますが、スムーズさは弱くなります。"
-    },
-    "rcSmoothingSetpointTypeHelp": {
-        "message": "セットポイントで使用されるフィルタリング方法のタイプ。ほとんどのユーザは、スムーズさと遅延のバランスが良いため、デフォルト値の『BIQUAD』を使用してください。『PT1』は遅延をわずかに減少させますが、スムーズさは弱くなります。"
     },
     "receiverRcSmoothingSetpointManual": {
         "message": "セットポイントフィルターカットオフ周波数を自動計算する(推奨)か、ユーザ手動選択するかを設定します。「手動」を使用する場合、飛行中にパラメータを変更できるCrossfireのような受信プロトコルにはお勧めできません。"
@@ -1806,47 +1832,11 @@
     "receiverRcSmoothingFeedforwardCutoff": {
         "message": "フィードフォワード カットオフ 周波数"
     },
-    "receiverRcSetpointType": {
-        "message": "セットポイント フィルタータイプ"
-    },
     "receiverRcFeedforwardType": {
         "message": "フィードフォワード フィルタータイプ"
     },
-    "receiverRcSmoothingFeedforwardTypeOff": {
-        "message": "OFF"
-    },
     "receiverRcSmoothingFeedforwardTypeAuto": {
         "message": "自動"
-    },
-    "receiverRcSmoothingChannel": {
-        "message": "スムージングチャンネル"
-    },
-    "receiverRcInterpolation": {
-        "message": "RC補間"
-    },
-    "receiverRcInterpolationHelp": {
-        "message": "RC送受信システムはPIDループほど高速ではありません。そのためRCシステムからの情報ではPIDループの中に信号の隙間が発生します。このオプションではRCフレームが受信されない間のRC入力の補間を行います。このオプションを使うと制御信号の荒れがなくなり、より明瞭なP値、D値の機体制御が可能となります。"
-    },
-    "receiverRcInterpolationIntervalHelp": {
-        "message": "ミリ秒単位での手動RC補間モードにおける補間間隔"
-    },
-    "receiverRcInterpolationOff": {
-        "message": "OFF"
-    },
-    "receiverRcSmoothingType": {
-        "message": "スムージングタイプ"
-    },
-    "receiverRcInterpolationDefault": {
-        "message": "プリセット"
-    },
-    "receiverRcInterpolationAuto": {
-        "message": "自動"
-    },
-    "receiverRcInterpolationManual": {
-        "message": "手動"
-    },
-    "receiverRcInterpolationInterval": {
-        "message": "RC補間間隔 [ms]"
     },
     "receiverRcSmoothingMode": {
         "message": "スムージングモード"
@@ -2456,18 +2446,6 @@
     },
     "adjustmentsHelp": {
         "message": "調整スイッチを設定します。詳細については、マニュアルの『in-flight adjustment(飛行調整)』の項目を参照してください。『調整』機能による変更は自動的には保存されません。"
-    },
-    "adjustmentSlotsHelp": {
-        "message": "4スロットありますが、同時に調整を行うために使用される各スイッチは、スロットの排他的な利用を必須とします。"
-    },
-    "adjustmentsExamples": {
-        "message": "例:"
-    },
-    "adjustmentsExample1": {
-        "message": "AUX1の3POSスイッチを使ってPitch\/RollのP、I、Dを選択し、AUX2のもう1つの3POSスイッチを押したままにすると値が増減します。"
-    },
-    "adjustmentsExample2": {
-        "message": "AUX4の3POSスイッチを使用し、同じチャンネルの同じ3POSスイッチでRateprofile選択を有効にします。"
     },
     "adjustmentsColumnEnable": {
         "message": "有効 \/ 無効"
@@ -3391,7 +3369,7 @@
         "message": "使用可能なFCボードを表示するには、ビルドタイプを選択します。"
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "FCボードを任意選択もしくは自動検出すると、オンラインでファームウェアの確認ができます - 適切なファームウェアを選択して下さい。"
+        "message": "FCボードを任意選択または検出すると、オンラインで利用可能なファームウェア リリースが表示されます - お使いのFCボードに適したファームウェアを選択してください。"
     },
     "firmwareFlasherOnlineSelectBoardHint": {
         "message": "Betaflight Configuratorは、各FCボード固有の設定を持つ統一ターゲットのファームウェアフラッシュをワンステップでサポートします。<br><br>統一ターゲットのコンセプトは、同じMCUを使用するすべてのFCボードで同じファームウェアの.hexファイルを使用できることを意味しています。<br><br>Betaflight 4.4で導入された<strong>クラウドビルド<\/strong><br><br><strong>クラウドビルド<\/strong>では、ビルドに存在するハードウェアオプションを定義する必要があります。<br><br>異なるFCボードを同じファームウェアで動作させるために、統一ターゲットファームウェアをフラッシュする際、それと同時に特定の設定ファイルが展開されます。<br><br>ローカルビルドでは、統一ターゲット設定ファイルをロードしたり、ファームウェアの.hexファイルをロードする前にFCボードを選択することができます。<br><br>ファームウェアを使用していて問題が発生した場合は、Discordへの参加、または<a href=\"https:\/\/github.com\/betaflight\/betaflight\/issues\" target=\"_blank\" rel=\"noopener noreferrer\">Issue<\/a>の新規投稿をご検討ください。"
@@ -3406,7 +3384,7 @@
         "message": "接続時に書き込み"
     },
     "firmwareFlasherFlashOnConnectDescription": {
-        "message": "FC基板の自動フラッシュを試みます。(新たに検出されたシリアルポートをトリガーにして実行されます。)<br \/><br \/><span class=\"message-negative\">警告<\/span>: この機能は自動検出とバックアップ機能を無効にします。"
+        "message": "FCボードのファームウェア自動書き込みを試みます。(新たに検出されたシリアルポートをトリガーにして実行されます) <br \/><br \/><span class=\"message-negative\">警告<\/span>: この機能は、検出とバックアップ機能を無効にします。"
     },
     "firmwareFlasherFullChipErase": {
         "message": "チップメモリの完全消去"
@@ -3549,6 +3527,9 @@
     "firmwareFlasherNoFirmwareSelected": {
         "message": "<b>ロードするファームウェア 未選択<\/b>"
     },
+    "firmwareFlasherNoTargetsLoaded": {
+        "message": "ターゲットが読み込まれていません"
+    },
     "firmwareFlasherNoValidPort": {
         "message": "<span class=\"message-negative\">有効なシリアルポートを選択してください<\/span>"
     },
@@ -3581,10 +3562,10 @@
         "message": "続行"
     },
     "firmwareFlasherDetectBoardButton": {
-        "message": "自動検出"
+        "message": "検出"
     },
     "firmwareFlasherDetectBoardDescriptionHint": {
-        "message": "自動検出は、DFUモードおよびMSP通信が動作している場合にのみ機能します。上手くいかない場合は、何度か再試行するかUSBを再接続する必要があります。デフォルト値からカスタムした値を適用し忘れているかもしれないので、一度通常通りに接続してください。書き込み後に再起動し、USBを再接続をお願いします。"
+        "message": "検出は、DFUモードではなく、MSP通信が動作している場合にのみ機能します。上手くいかない場合は、何度か再試行するかUSBを再接続する必要があります。デフォルト値からカスタムした値を適用し忘れているかもしれないので、まずは通常通りに接続してみてください。ファームウェア書き込み後に再起動し、USBを再接続してみてください。"
     },
     "firmwareFlasherDetectBoardQuery": {
         "message": "適切なファームウェアを選択するためにボード情報を照会する"
@@ -4169,30 +4150,6 @@
         "message": "すべてのPIDパラメータを均等に増加させます。他のスライダーで調整しきれない場合は、このスライダーを変更しないでください。通常、これはX-ClassやCineLifterのような制御の弱い機体、または高慣性モーメント (MoI) の機体にのみ必要です。基準値の強度を上げすぎると、振動やモーター発熱を引き起こす可能性があります。",
         "description": "Master Gain tuning slider helpicon message"
     },
-    "pidTuningPDRatioSlider": {
-        "message": "PD値 バランス:",
-        "description": "PD balance tuning slider label"
-    },
-    "pidTuningPDRatioSliderHelp": {
-        "message": "D値とD Max値を変更します。D値を比較的高くすると、スティック応答性が鈍くなり、モーターが高温になりますが、P値の振動を抑え、プロップウォッシュの振動を改善します。<br \/><br \/>D値が比較的低いとスティック応答性は速くなりますが、プロップウォッシュの処理や外力 (風) への反応が弱くなります。",
-        "description": "D_term tuning slider helpicon message"
-    },
-    "pidTuningPDGainSlider": {
-        "message": "P&D値 強度:",
-        "description": "P and D Gain tuning slider label"
-    },
-    "pidTuningPDGainSliderHelp": {
-        "message": "P値とD値の強度[ゲイン] が低いと、モーターは冷却されますが、プロップウォッシュによる振動が大きくなります。値が低すぎると機体が不安定になる場合があります。<br \/><br \/>P値とD値は連動してプロップウォッシュを減少させます。<br \/><br \/>値を高くするとモーターは高温となり、D値強度が高くなるため、スムーズな直進飛行中に振動が増加する場合があります。",
-        "description": "P and D gain tuning slider helpicon message"
-    },
-    "pidTuningResponseSliderLegacy": {
-        "message": "スティックレスポンス 強度:",
-        "description": "Response tuning slider label"
-    },
-    "pidTuningResponseSliderLegacyHelp": {
-        "message": "FF値を低くするとスティックのレスポンスが悪くなり、フリップやロールの最後のバウンスバックが遅くなることがあります。これは機体がスティックに追従し過ぎてI値が終いには『I値 バウンスバック』現象が発生する場合があります。<br \/><br \/>FF値を高くすると、シャープな動きとなりスティックのレスポンスが良くなります。FF値が高過ぎるとフリップやロールの最後にオーバーシュートや素早いバウンスバックが発生する場合があります。<br \/><br \/>注: <br \/>I値リラックス機能は、制御の弱い機体や、スティックレスポンス強度が低い場合に、スティック動作での最後の揺らぎを止めることができます。",
-        "description": "Stick response gain tuning slider helpicon message"
-    },
     "pidTuningDGainSlider": {
         "message": "ダンピング:<br \/><i><small>D 強度<\/small><\/i>",
         "description": "D Gain (Damping) tuning slider label"
@@ -4274,17 +4231,11 @@
     "pidTuningLowpassFilterType": {
         "message": "フィルタータイプ"
     },
-    "pidTuningGyroLowpassDyn": {
-        "message": "ジャイロ ローパス動的フィルタ"
-    },
     "pidTuningMinCutoffFrequency": {
         "message": "最小カットオフ周波数 [Hz]"
     },
     "pidTuningMaxCutoffFrequency": {
         "message": "最大カットオフ周波数 [Hz]"
-    },
-    "pidTuningGyroLowpassDynType": {
-        "message": "ジャイロ ローパス1 動的フィルタータイプ"
     },
     "pidTuningGyroLowpass2": {
         "message": "ジャイロ ローパス2"
@@ -4344,9 +4295,6 @@
     "pidTuningDynamicNotchRange": {
         "message": "動的ノッチフィルター範囲"
     },
-    "pidTuningDynamicNotchWidthPercent": {
-        "message": "動的ノッチ 幅%"
-    },
     "pidTuningDynamicNotchQ": {
         "message": "Q 係数"
     },
@@ -4361,9 +4309,6 @@
     },
     "pidTuningDynamicNotchRangeHelp": {
         "message": "動的ノッチには、設定可能な3つの周波数範囲があります。6インチ以上の低回転型クワッドコプターの場合はLOW(80-330hz)、通常の5インチの場合はMEDIUM(140-550hz)、2.5～3インチのような非常に高回転の場合はHIGH(230-800hz) となります。AUTOオプションは、動的ジャイロローパスフィルター1の最大カットオフ周波数の値に応じて範囲を選択します。"
-    },
-    "pidTuningDynamicNotchWidthPercentHelp": {
-        "message": "これにより、2つの動的ノッチフィルター間の幅が設定されます。0に設定すると、動的ノッチフィルター2が無効となり、フィルター遅延が減少しますが、モーターの温度が高くなる場合があります。"
     },
     "pidTuningDynamicNotchQHelp": {
         "message": "Q 係数は動的ノッチフィルターの幅を調整します。値を大きくすると幅が狭くなり、より正確となり、値を低くすると幅が広くなります。本当に低い値を設定すると、フィルター遅延が大幅に増加します。"
@@ -4433,14 +4378,8 @@
     "pidTuningDTermLowpass2Type": {
         "message": "フィルタータイプ"
     },
-    "pidTuningDTermLowpassDyn": {
-        "message": "D値 ローパス 動的フィルター"
-    },
     "pidTuningDTermLowpassDynExpo": {
         "message": "動的カーブ Expo"
-    },
-    "pidTuningDTermLowpassDynType": {
-        "message": "動的フィルタータイプ"
     },
     "pidTuningDTermNotchFiltersGroup": {
         "message": "D値ノッチフィルター"
@@ -4623,7 +4562,7 @@
         "message": "検索\nシグナル消失後のステージ 1 フェイルセーフ時間を設定します。信号が回復せず期限の時間が経過した場合、ステージ 2 フェイルセーフが開始されます。"
     },
     "failsafeThrottleLowItem": {
-        "message": "フェイルセーフ スロットル低遅延 [seconds]"
+        "message": "フェイルセーフ時にスロットル低とする遅延時間 [seconds]"
     },
     "failsafeThrottleLowHelp": {
         "message": "選択しているフェイルセーフを実行する代わりに、この時間の間スロットルが低かったとき機体をディスアームします。"
@@ -4632,7 +4571,7 @@
         "message": "着陸時に使用されるスロットル値"
     },
     "failsafeOffDelayItem": {
-        "message": "フェイルセーフ時のモーターOFF遅延時間 [seconds]"
+        "message": "フェイルセーフ時にモーターOFFとする遅延時間 [seconds]"
     },
     "failsafeOffDelayHelp": {
         "message": "モーターがオフになり、機体がディスアームされるまで着陸モードに留まる時間"
@@ -5483,12 +5422,20 @@
     "osdDescElementAltitude": {
         "message": "現在の高度 (アラーム値を超えると点滅)"
     },
-    "osdTextElementAltitudeVariant1Decimal": {
-        "message": "小数点以下 1桁",
+    "osdTextElementAltitudeVariant1DecimalAGL": {
+        "message": "AGL (小数点第一位)",
         "description": "One of the variants of the altitude element of the OSD"
     },
-    "osdTextElementAltitudeVariantNoDecimal": {
-        "message": "小数点なし",
+    "osdTextElementAltitudeVariantNoDecimalAGL": {
+        "message": "AGL (小数点なし)",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariant1DecimalASL": {
+        "message": "ASL (小数点第一位)",
+        "description": "One of the variants of the altitude element of the OSD"
+    },
+    "osdTextElementAltitudeVariantNoDecimalASL": {
+        "message": "ASL (小数点なし)",
         "description": "One of the variants of the altitude element of the OSD"
     },
     "osdTextElementOnTime": {
@@ -6238,6 +6185,10 @@
         "message": "リンク品質",
         "description": "Text of the link quality alarm"
     },
+    "osdTimerAlarmOptionRssiDbm": {
+        "message": "RSSI dBm",
+        "description": "Text of the RSSI dBm alarm"
+    },
     "osdWarningTextArmingDisabled": {
         "message": "アーム無効",
         "description": "One of the warnings that can be selected to be shown in the OSD"
@@ -6363,6 +6314,14 @@
     },
     "osdWarningRSNR": {
         "message": "RSNR値がアラーム設定を下回ったときの警告"
+    },
+    "osdWarningTextLoad": {
+        "message": "ロード",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningLoad": {
+        "message": "フライトコントローラのCPU使用率が高すぎる場合の警告",
+        "description": "Description of one of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningTextUnknown": {
         "message": "不明 $1"
@@ -6701,9 +6660,6 @@
         "message": "ESC \/ モータープロトコル"
     },
     "configurationEscProtocolHelp": {
-        "message": "モータープロトコルを選択してください。<br>プロトコルがESCによってサポートされていることを確認してください。この情報はメーカーのWebサイトを確認してください。<br> <b>DSHOT900とDSHOT1200は、現在それほど多くのESCをサポートしていないため、使用の際はご注意ください！<\/b>"
-    },
-    "configurationEscProtocolHelpNoDSHOT1200": {
         "message": "モータープロトコルを選択してください。<br>そのプロトコルがESC側でサポートされているかを確認してください。サポート情報はメーカーのWebサイトをご覧ください。"
     },
     "configurationunsyndePwm": {
@@ -6939,6 +6895,9 @@
     },
     "pidTuningRcRateActual": {
         "message": "中央値の感度"
+    },
+    "pidTuningAcroCenterSensitiviy": {
+        "message": "中央～最大値の感度"
     },
     "dialogRatesTypeTitle": {
         "message": "レートタイプ変更"

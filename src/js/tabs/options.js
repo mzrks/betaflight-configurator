@@ -23,7 +23,6 @@ options.initialize = function (callback) {
         TABS.options.initAnalyticsOptOut();
         TABS.options.initCliAutoComplete();
         TABS.options.initShowAllSerialDevices();
-        TABS.options.initUseMdnsBrowser();
         TABS.options.initShowVirtualMode();
         TABS.options.initUseManualConnection();
         TABS.options.initCordovaForceComputerUI();
@@ -130,8 +129,9 @@ options.initShowAllSerialDevices = function() {
     showAllSerialDevicesElement
         .prop('checked', !!result.showAllSerialDevices)
         .on('change', () => {
-            setConfig({ showAllSerialDevices: showAllSerialDevicesElement.is(':checked') });
-            PortHandler.reinitialize();
+            const checked = showAllSerialDevicesElement.is(':checked');
+            setConfig({ showAllSerialDevices: checked });
+            PortHandler.setShowAllSerialDevices(checked);
         });
 };
 
@@ -141,8 +141,9 @@ options.initShowVirtualMode = function() {
     showVirtualModeElement
         .prop('checked', !!result.showVirtualMode)
         .on('change', () => {
-            setConfig({ showVirtualMode: showVirtualModeElement.is(':checked') });
-            PortHandler.reinitialize();
+            const checked = showVirtualModeElement.is(':checked');
+            setConfig({ showVirtualMode: checked });
+            PortHandler.setShowVirtualMode(checked);
         });
 };
 
@@ -152,19 +153,9 @@ options.initUseManualConnection = function() {
     showManualModeElement
         .prop('checked', !!result.showManualMode)
         .on('change', () => {
-            setConfig({ showManualMode: showManualModeElement.is(':checked') });
-            PortHandler.reinitialize();
-        });
-};
-
-options.initUseMdnsBrowser = function() {
-    const useMdnsBrowserElement = $('div.useMdnsBrowser input');
-    const result = getConfig('useMdnsBrowser');
-    useMdnsBrowserElement
-        .prop('checked', !!result.useMdnsBrowser)
-        .on('change', () => {
-            setConfig({ useMdnsBrowser: useMdnsBrowserElement.is(':checked') });
-            PortHandler.reinitialize();
+            const checked = showManualModeElement.is(':checked');
+            setConfig({ showManualMode: checked });
+            PortHandler.setShowManualMode(checked);
         });
 };
 
