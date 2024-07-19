@@ -1536,10 +1536,10 @@ OSD.loadDisplayFields = function() {
             positionable: true,
             preview: '1:23.456',
         },
-        INITIATION_BOARD_INFO: {
-            name: 'INITIATION_BOARD_INFO',
-            text: 'INITIATION_BOARD_INFO',
-            desc: 'INITIATION_BOARD_INFO',
+        INIT_BOARD_INFO: {
+            name: 'INIT_BOARD_INFO',
+            text: 'INIT_BOARD_INFO',
+            desc: 'INIT_BOARD_INFO',
             defaultPosition: -1,
             draw_order: 1075,
             positionable: true,
@@ -1998,7 +1998,7 @@ OSD.chooseFields = function() {
     }
 
     OSD.constants.DISPLAY_FIELDS = OSD.constants.DISPLAY_FIELDS.concat([
-        F.INITIATION_BOARD_INFO
+        F.INIT_BOARD_INFO,
     ]);
 
     // Choose statistic fields
