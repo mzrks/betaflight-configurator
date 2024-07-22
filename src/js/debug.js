@@ -92,6 +92,7 @@ const DEBUG = {
         {text: "EZLANDING"},
         {text: "TPA"},
         {text: "S_TERM"},
+        {text: "INIT_BOARD"},
     ],
 
     fieldNames : {
@@ -769,6 +770,10 @@ const DEBUG = {
             'debug[0]': 'S Term [roll]',
             'debug[1]': 'S Term [pitch]',
             'debug[2]': 'S Term [yaw]',
+        },
+        'INIT_BOARD' : {
+            'debug[all]':'Init Board',
+            'debug[0]':'Test log',
         },
     },
 

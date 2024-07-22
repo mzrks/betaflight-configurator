@@ -33,6 +33,7 @@ ports.initialize = function (callback) {
         { name: 'RUNCAM_DEVICE_CONTROL', groups: ['peripherals'], maxPorts: 1 },
         { name: 'LIDAR_TF',             groups: ['peripherals'], maxPorts: 1 },
         { name: 'FRSKY_OSD',            groups: ['peripherals'], maxPorts: 1 },
+        { name: 'INIT_BOARD',           groups: ['peripherals'], sharableWith: ['msp'], maxPorts: 1 },
     ];
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)) {
