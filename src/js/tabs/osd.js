@@ -1522,6 +1522,15 @@ OSD.loadDisplayFields = function() {
             positionable: true,
             preview: 'INITIATION IN 120',
         },
+        INIT_BOARD_LOG: {
+            name: 'INIT_BOARD_LOG',
+            text: 'INIT_BOARD_LOG',
+            desc: 'INIT_BOARD_LOG',
+            defaultPosition: -1,
+            draw_order: 1076,
+            positionable: true,
+            preview: 'NO LOG',
+        },
     };
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_47) && have_sensor(FC.CONFIG.activeSensors, 'gps')) {
@@ -1971,6 +1980,7 @@ OSD.chooseFields = function() {
 
     OSD.constants.DISPLAY_FIELDS = OSD.constants.DISPLAY_FIELDS.concat([
         F.INIT_BOARD_INFO,
+        F.INIT_BOARD_LOG,
     ]);
 
     // Choose statistic fields
